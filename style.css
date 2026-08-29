@@ -1,0 +1,33 @@
+ body {
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+ }
+
+ #question {
+  font-size: 48px;  
+ }
+
+ .gameButton {
+    font-size: 25px;
+    padding: 12px;
+    margin: 30px;
+    border-radius: 10px;
+    cursor: pointer;
+ }
+
+     #gotItButton, #missedButton {width: 140px;}
+
+.card {
+    width: 90%;
+    max-width: 400px;
+    min-height: 200px;
+
+    margin: 30px auto;
+    padding: 20px;
+
+    border: 2px solid black;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+   }
+
+

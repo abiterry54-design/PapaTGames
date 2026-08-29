@@ -1,0 +1,30 @@
+[
+    {
+        "question": "perro",
+        "answer": "dog"
+    },
+    {
+        "question": "gato",
+        "answer": "cat"
+    },
+    {
+        "question": "casa",
+        "answer": "house"
+    },
+    {
+        "question": "libro",
+        "answer": "book"
+    },
+    {
+        "question": "vaca",
+        "answer": "cow"
+    },
+    {
+        "question": "mesa",
+        "answer": "table"
+    },
+    {
+        "question": "puerta",
+        "answer": "door"
+    }
+]
