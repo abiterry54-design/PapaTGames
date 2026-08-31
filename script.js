@@ -1,6 +1,8 @@
 
     let cards = [];
     let currentCard=0;
+    let masteredCount = 0;
+    const masteryGoal = 2;
     
 
         async function loadCards(){
@@ -8,8 +10,9 @@
             cards = await response.json();
             
             for (let i = 0; i < cards.length; i++) {
-                cards[i].correct=0;
-                cards[i].missed=0;    
+                cards[i].correct = 0;
+                cards[i].missed = 0;
+                cards[i].streak = 0;    
             }
         }
 
@@ -18,18 +21,42 @@
            setGameState("answer");
         }
 
+
+
+
+
         function nextCard() {
             currentCard++;
 
-            if (currentCard >= cards.length) {
-                //shuffleCards();
-                //currentCard=0;
+            if (masteredCount===cards.length) {
                 endRound();
                 return;
             }
+
+            if (currentCard >= cards.length) {
+                shuffleCards();
+                currentCard=0;
+            }
+
+            while (cards[currentCard].streak >= masteryGoal) {
+                currentCard++;
+                if (currentCard>=cards.length) {
+                    shuffleCards();
+                    currentCard=0;
+                }
+            }
+  
             displayCurrentCard();
             setGameState("question");
         }
+
+
+
+
+
+
+
+
 
         function displayCurrentCard() {
             document.getElementById("question").innerHTML = cards[currentCard].question;
@@ -47,6 +74,10 @@
         
         function gotIt() {
             cards[currentCard].correct++;
+            cards[currentCard].streak++;
+            if (cards[currentCard].streak===masteryGoal) {
+                masteredCount++;
+            }
             updateScore();
             saveProgress();
             nextCard();
@@ -54,6 +85,7 @@
 
         function missedIt() {
             cards[currentCard].missed++;
+            cards[currentCard].streak=0;
             updateScore();
             saveProgress();
             nextCard();
