@@ -8,48 +8,70 @@
 
     <h1>Speech Test</h1>
 
+    <h2 id="word">DOOR</h2>
+
     <button onclick="startListening()">🎤 Speak</button>
 
     <p id="status">Press Speak and say a word.</p>
+    <p id="heard"></p>
+    <p id="result"></p>
 
-    <script>
-        function startListening() {
 
-            const SpeechRecognition =
-                window.SpeechRecognition ||
-                window.webkitSpeechRecognition;
+  <script>
+    let expectedWord = "door";
 
-            const recognition = new SpeechRecognition();
+    function startListening() {
 
-            recognition.lang = "en-US";
-            recognition.interimResults = false;
-            recognition.maxAlternatives = 1;
+        const SpeechRecognition =
+            window.SpeechRecognition ||
+            window.webkitSpeechRecognition;
+
+        const recognition = new SpeechRecognition();
+
+        recognition.lang = "en-US";
+        recognition.interimResults = false;
+        recognition.maxAlternatives = 1;
+
+        document.getElementById("status").innerHTML =
+            "Listening...";
+
+        recognition.start();
+
+        recognition.onresult = function(event) {
+
+            let spokenWord =
+                event.results[0][0].transcript;
+
+            spokenWord = spokenWord
+                .trim()
+                .toLowerCase()
+                .replace(/[.,!?]/g, "");
+
+            document.getElementById("heard").innerHTML =
+                "You said: " + spokenWord;
+
+            if (spokenWord === expectedWord) {
+                document.getElementById("result").innerHTML =
+                    "✅ Correct!";
+            }
+            else {
+                document.getElementById("result").innerHTML =
+                    "❌ Try Again";
+            }
+
+            console.log("Expected:", expectedWord);
+            console.log("Heard:", spokenWord);
+        };
+
+        recognition.onerror = function(event) {
 
             document.getElementById("status").innerHTML =
-                "Listening...";
+                "Speech error: " + event.error;
 
-            recognition.start();
-
-            recognition.onresult = function(event) {
-
-                let spokenWord =
-                    event.results[0][0].transcript;
-
-                document.getElementById("status").innerHTML =
-                    "You said: " + spokenWord;
-
-                console.log("Speech heard:", spokenWord);
-            };
-
-            recognition.onerror = function(event) {
-
-                document.getElementById("status").innerHTML =
-                    "Speech error: " + event.error;
-
-                console.log("Speech error:", event.error);
-            };
-        }
-    </script>
+            console.log("Speech error:", event.error);
+        };
+    }
+</script>
 
 </body>
 </html>
