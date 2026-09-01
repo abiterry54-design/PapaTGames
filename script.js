@@ -117,6 +117,13 @@
         }
 
         function startNewRound() {
+            console.log("startNewRound called");
+
+            masteredCount=0;
+            for (let i = 0; i < cards.length; i++) {
+                cards[i].streak=0;    
+            }
+            
             shuffleCards();
             currentCard=0;
             displayCurrentCard();
