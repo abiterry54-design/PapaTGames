@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Speech Test</title>
+</head>
+
+<body>
+
+    <h1>Speech Test</h1>
+
+    <button onclick="startListening()">🎤 Speak</button>
+
+    <p id="status">Press Speak and say a word.</p>
+
+    <script>
+        function startListening() {
+
+            const SpeechRecognition =
+                window.SpeechRecognition ||
+                window.webkitSpeechRecognition;
+
+            const recognition = new SpeechRecognition();
+
+            recognition.lang = "en-US";
+            recognition.interimResults = false;
+            recognition.maxAlternatives = 1;
+
+            document.getElementById("status").innerHTML =
+                "Listening...";
+
+            recognition.start();
+
+            recognition.onresult = function(event) {
+
+                let spokenWord =
+                    event.results[0][0].transcript;
+
+                document.getElementById("status").innerHTML =
+                    "You said: " + spokenWord;
+
+                console.log("Speech heard:", spokenWord);
+            };
+
+            recognition.onerror = function(event) {
+
+                document.getElementById("status").innerHTML =
+                    "Speech error: " + event.error;
+
+                console.log("Speech error:", event.error);
+            };
+        }
+    </script>
+
+</body>
+</html>
