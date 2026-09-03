@@ -1,0 +1,9 @@
+[
+{"id":"hotdog","prompt":"Hot Dog","answers":["hot dog"],"image":"images/hotdog.png"},
+{"id":"dog","prompt":"Dog","answers":["dog"],"image":"images/dog.jpeg"},
+{"id":"cat","prompt":"Cat","answers":["cat","kitty"],"image":"images/cat.jpeg"},
+{"id":"bus","prompt":"Bus","answers":["bus","orion"],"image":"images/bus.jpeg"},
+{"id":"gus","prompt":"Gus","answers":["gus","dog","orion","friends"],"image":"images/gus.jpeg"},
+{"id":"finn","prompt":"Finn","answers":["fin","dog"],"image":"images/finn.jpeg"},
+{"id":"daddy","prompt":"Daddy","answers":["daddy","dad"],"image":"images/daddy.jpeg"}
+]

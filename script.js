@@ -6,7 +6,7 @@
     
 
         async function loadCards(){
-            let response = await fetch("spanish.json");
+            let response = await fetch("dictionary.json");
             cards = await response.json();
             
             for (let i = 0; i < cards.length; i++) {
@@ -17,10 +17,9 @@
         }
 
         function showAnswer() {
-           document.getElementById("answer").innerHTML = cards[currentCard].answer;
+           document.getElementById("answer").innerHTML = cards[currentCard].answers[0];
            setGameState("answer");
         }
-
 
 
 
@@ -59,7 +58,7 @@
 
 
         function displayCurrentCard() {
-            document.getElementById("question").innerHTML = cards[currentCard].question;
+            document.getElementById("question").innerHTML = cards[currentCard].prompt;
             document.getElementById("answer").innerHTML = "";
         }
 
@@ -135,7 +134,7 @@
             let progress = [];
             for (let i = 0; i < cards.length; i++) {
                 progress.push({
-                    question: cards[i].question,
+                    question: cards[i].id,
                     correct: cards[i].correct,
                     missed: cards[i].missed
                 });   
@@ -154,7 +153,7 @@
 
                 for (let j = 0; j < progress.length; j++) {
 
-                    if (cards[i].question === progress[j].question) {
+                    if (cards[i].question === progress[j].id) {
                         cards[i].correct = progress[j].correct;
                         cards[i].missed = progress[j].missed;
                     }
@@ -174,11 +173,12 @@
          }
         }
 
- function setGameState(action) {
+    function setGameState(action) {
 
-    switch (action) {
+        switch (action) {
 
         case "question":
+            document.getElementById("speakButton").style.display = "inline-block";
             document.getElementById("showButton").style.display = "inline-block";
             document.getElementById("gotItButton").style.display = "none";
             document.getElementById("missedButton").style.display = "none";
@@ -186,6 +186,7 @@
             break;
 
         case "answer":
+            document.getElementById("speakButton").style.display = "inline-block";
             document.getElementById("showButton").style.display = "none";
             document.getElementById("gotItButton").style.display = "inline-block";
             document.getElementById("missedButton").style.display = "inline-block";
@@ -193,14 +194,93 @@
             break;
 
         case "roundComplete":
+            document.getElementById("speakButton").style.display = "none";
             document.getElementById("showButton").style.display = "none";
             document.getElementById("gotItButton").style.display = "none";
             document.getElementById("missedButton").style.display = "none";
             document.getElementById("playAgainButton").style.display = "inline-block";
             break;  
 
+        }
+    } 
+    
+// --------------------
+// SPEECH RECOGNITION
+// --------------------
+
+function startListening() {
+
+    const SpeechRecognition =
+        window.SpeechRecognition ||
+        window.webkitSpeechRecognition;
+
+    const recognition = new SpeechRecognition();
+
+    recognition.lang = "en-US";
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+
+    document.getElementById("answer").innerHTML =
+        "Listening...";
+
+    recognition.start();
+
+    recognition.onresult = function(event) {
+
+        let spokenWord =
+            event.results[0][0].transcript;
+
+        spokenWord = spokenWord
+            .trim()
+            .toLowerCase()
+            .replace(/[.,!?]/g, "");
+
+        console.log("Speech heard:", spokenWord);
+
+        checkSpokenAnswer(spokenWord);
+    };
+
+    recognition.onerror = function(event) {
+
+        console.log(
+            "Speech error:",
+            event.error
+        );
+
+        document.getElementById("answer").innerHTML =
+            "I didn't hear that. Try again.";
+    };
+}
+
+function checkSpokenAnswer(spokenWord) {
+
+    let normalizedAnswers =
+        cards[currentCard].answers.map(answer =>
+            answer.trim().toLowerCase()
+        );
+
+    console.log(
+        "Accepted answers:",
+        normalizedAnswers
+    );
+
+    if (normalizedAnswers.includes(spokenWord)) {
+
+        document.getElementById("answer").innerHTML =
+            "Correct!";
+
+        gotIt();
     }
-}       
+    else {
+
+        document.getElementById("answer").innerHTML =
+            "Try Again";
+
+        missedIt();
+    }
+}
+
+
 
 
 //Startup Here
