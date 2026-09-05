@@ -18,6 +18,11 @@
 
         function showAnswer() {
            document.getElementById("answer").innerHTML = cards[currentCard].answers[0];
+
+            let cardImage = document.getElementById("cardImage");
+            cardImage.src = cards[currentCard].image;
+            //cardImage.style.display = "block";
+
            setGameState("answer");
         }
 
@@ -50,17 +55,18 @@
         }
 
 
-
-
-
-
-
-
-
         function displayCurrentCard() {
+            
+           // document.getElementById("cardImage").style.display = "none";
             document.getElementById("question").innerHTML = cards[currentCard].prompt;
             document.getElementById("answer").innerHTML = "";
+            showDefaultImage();
         }
+
+        function showDefaultImage() {
+            document.getElementById("cardImage").src = "images/papat7.png";
+        }
+
 
         function shuffleCards() {
            for (let i = cards.length - 1; i > 0; i--) {
