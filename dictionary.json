@@ -1,10 +1,10 @@
 [
-{"id":"hotdog","prompt":"Hot Dog","answers":["hotdog"],"image":"images/hotdog.png"},
+{"id":"hotdog","prompt":"Hot Dog","answers":["hotdog","hot dog"],"image":"images/hotdog.png"},
 {"id":"dog","prompt":"Dog","answers":["dog"],"image":"images/dog.png"},
 {"id":"cat","prompt":"Cat","answers":["cat","kitty"],"image":"images/cat.png"},
 {"id":"bus","prompt":"Bus","answers":["bus","orion"],"image":"images/bus.png"},
 {"id":"gus","prompt":"Gus","answers":["gus","dog","orion","friends"],"image":"images/gus.png"},
-{"id":"finn","prompt":"Finn","answers":["fin","dog"],"image":"images/finn.png?v=2"},
+{"id":"finn","prompt":"Finn","answers":["fin","dog","finn"],"image":"images/finn.png?v=2"},
 {"id":"Ldad","prompt":"Dad","answers":["dad"],"image":"images/ldad.png"},
 {"id":"Lfamily","prompt":"Family","answers":["family"],"image":"images/Lfamily.png"},
 {"id":"Lmother","prompt":"Mom","answers":["mom"],"image":"images/Lmother.png"}

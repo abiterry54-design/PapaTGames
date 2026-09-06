@@ -4,6 +4,15 @@
     let masteredCount = 0;
     const masteryGoal = 2;
     const cardImage = document.getElementById("cardImage");
+    const showButton = document.getElementById("showButton");
+    showButton.addEventListener("click", () => {
+
+    if (showButton.textContent === "Next") {
+        nextCard();
+    } else {
+        showAnswer();
+    }
+    });
     
 
         async function loadCards(){
@@ -50,7 +59,7 @@
             }
   
             displayCurrentCard();
-            setGameState("question");
+            setGameState("readSpeak");
         }
 
 
@@ -76,7 +85,7 @@
            }
         }
         
-        function gotIt() {
+        function gotIt(advance = true) {
             cards[currentCard].correct++;
             cards[currentCard].streak++;
             if (cards[currentCard].streak===masteryGoal) {
@@ -84,15 +93,22 @@
             }
             updateScore();
             saveProgress();
-            nextCard();
+
+            if (advance) {
+                nextCard();   
+            }
         }
 
-        function missedIt() {
+        function missedIt(advance= true) {
             cards[currentCard].missed++;
             cards[currentCard].streak=0;
             updateScore();
             saveProgress();
-            nextCard();
+
+            if (advance) {
+                nextCard();   
+            }
+        
         }
 
         function updateScore() {
@@ -131,7 +147,7 @@
             shuffleCards();
             currentCard=0;
             displayCurrentCard();
-            setGameState("question");
+            setGameState("readSpeak");
         }
 
         function saveProgress() {
@@ -180,6 +196,8 @@
 
     function setGameState(action) {
 
+console.log("Game state:", action);
+
         switch (action) {
 
         case "question":
@@ -188,6 +206,7 @@
             document.getElementById("gotItButton").style.display = "none";
             document.getElementById("missedButton").style.display = "none";
             document.getElementById("playAgainButton").style.display = "none";
+            showButton.textContent = "Show Answer";
             break;
 
         case "answer":
@@ -204,7 +223,45 @@
             document.getElementById("gotItButton").style.display = "none";
             document.getElementById("missedButton").style.display = "none";
             document.getElementById("playAgainButton").style.display = "inline-block";
-            break;  
+            break;
+            
+        case "readSpeak":
+            // Read → Speak: child sees the word and presses Speak
+            document.getElementById("speakButton").style.display = "inline-block";
+            document.getElementById("showButton").style.display = "none";
+            document.getElementById("gotItButton").style.display = "none";
+            document.getElementById("missedButton").style.display = "none";
+            document.getElementById("playAgainButton").style.display = "none";
+            break;
+
+        case "readResult":
+            // Read → Speak: answer has been checked
+            // Later showButton will become our Next button
+            document.getElementById("speakButton").style.display = "none";
+            document.getElementById("showButton").style.display = "inline-block";
+            document.getElementById("gotItButton").style.display = "none";
+            document.getElementById("missedButton").style.display = "none";
+            document.getElementById("playAgainButton").style.display = "none";
+            showButton.textContent = "Next";
+            break;
+
+        case "seeSpeak":
+            // See → Say: child sees picture and presses Speak
+            document.getElementById("speakButton").style.display = "inline-block";
+            document.getElementById("showButton").style.display = "none";
+            document.getElementById("gotItButton").style.display = "none";
+            document.getElementById("missedButton").style.display = "none";
+            document.getElementById("playAgainButton").style.display = "none";
+            break;
+            
+            case "readRetry":
+            document.getElementById("speakButton").style.display = "inline-block";
+            document.getElementById("showButton").style.display = "none";
+            document.getElementById("gotItButton").style.display = "none";
+            document.getElementById("missedButton").style.display = "none";
+            document.getElementById("playAgainButton").style.display = "none";
+            break;
+
 
         }
     } 
@@ -274,15 +331,19 @@ function checkSpokenAnswer(spokenWord) {
         document.getElementById("answer").innerHTML =
             "Correct!";
 
-        gotIt();
+            cardImage.src = cards[currentCard].image;
+            gotIt(false);
+            setGameState("readResult");
     }
     else {
 
         document.getElementById("answer").innerHTML =
             "Try Again";
 
-        missedIt();
-    }
+            cardImage.src = cards[currentCard].image;
+            missedIt(false);
+            setGameState("readRetry");
+        }
 }
 
 
@@ -296,7 +357,7 @@ async function startGame() {
     shuffleCards();
     displayCurrentCard();
     updateScore();
-    setGameState("question");
+    setGameState("readSpeak");
 }
 
 startGame();
