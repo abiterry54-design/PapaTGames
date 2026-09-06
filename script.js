@@ -3,6 +3,7 @@
     let currentCard=0;
     let masteredCount = 0;
     const masteryGoal = 2;
+    const cardImage = document.getElementById("cardImage");
     
 
         async function loadCards(){
@@ -19,9 +20,7 @@
         function showAnswer() {
            document.getElementById("answer").innerHTML = cards[currentCard].answers[0];
 
-            let cardImage = document.getElementById("cardImage");
-            cardImage.src = cards[currentCard].image;
-            //cardImage.style.display = "block";
+           cardImage.src = cards[currentCard].image;
 
            setGameState("answer");
         }
