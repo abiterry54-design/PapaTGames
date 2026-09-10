@@ -1,0 +1,806 @@
+{
+  "deck": "Fry 100 Review",
+  "subject": "reading",
+  "items": [
+    {
+      "id": "fry001",
+      "type": "readSpeak",
+      "prompt": "the",
+      "answers": [
+        "the"
+      ]
+    },
+    {
+      "id": "fry002",
+      "type": "readSpeak",
+      "prompt": "of",
+      "answers": [
+        "of"
+      ]
+    },
+    {
+      "id": "fry003",
+      "type": "readSpeak",
+      "prompt": "and",
+      "answers": [
+        "and"
+      ]
+    },
+    {
+      "id": "fry004",
+      "type": "readSpeak",
+      "prompt": "a",
+      "answers": [
+        "a"
+      ]
+    },
+    {
+      "id": "fry005",
+      "type": "readSpeak",
+      "prompt": "to",
+      "answers": [
+        "to"
+      ]
+    },
+    {
+      "id": "fry006",
+      "type": "readSpeak",
+      "prompt": "in",
+      "answers": [
+        "in"
+      ]
+    },
+    {
+      "id": "fry007",
+      "type": "readSpeak",
+      "prompt": "is",
+      "answers": [
+        "is"
+      ]
+    },
+    {
+      "id": "fry008",
+      "type": "readSpeak",
+      "prompt": "you",
+      "answers": [
+        "you"
+      ]
+    },
+    {
+      "id": "fry009",
+      "type": "readSpeak",
+      "prompt": "that",
+      "answers": [
+        "that"
+      ]
+    },
+    {
+      "id": "fry010",
+      "type": "readSpeak",
+      "prompt": "it",
+      "answers": [
+        "it"
+      ]
+    },
+    {
+      "id": "fry011",
+      "type": "readSpeak",
+      "prompt": "he",
+      "answers": [
+        "he"
+      ]
+    },
+    {
+      "id": "fry012",
+      "type": "readSpeak",
+      "prompt": "was",
+      "answers": [
+        "was"
+      ]
+    },
+    {
+      "id": "fry013",
+      "type": "readSpeak",
+      "prompt": "for",
+      "answers": [
+        "for"
+      ]
+    },
+    {
+      "id": "fry014",
+      "type": "readSpeak",
+      "prompt": "on",
+      "answers": [
+        "on"
+      ]
+    },
+    {
+      "id": "fry015",
+      "type": "readSpeak",
+      "prompt": "are",
+      "answers": [
+        "are"
+      ]
+    },
+    {
+      "id": "fry016",
+      "type": "readSpeak",
+      "prompt": "as",
+      "answers": [
+        "as"
+      ]
+    },
+    {
+      "id": "fry017",
+      "type": "readSpeak",
+      "prompt": "with",
+      "answers": [
+        "with"
+      ]
+    },
+    {
+      "id": "fry018",
+      "type": "readSpeak",
+      "prompt": "his",
+      "answers": [
+        "his"
+      ]
+    },
+    {
+      "id": "fry019",
+      "type": "readSpeak",
+      "prompt": "they",
+      "answers": [
+        "they"
+      ]
+    },
+    {
+      "id": "fry020",
+      "type": "readSpeak",
+      "prompt": "I",
+      "answers": [
+        "I"
+      ]
+    },
+    {
+      "id": "fry021",
+      "type": "readSpeak",
+      "prompt": "at",
+      "answers": [
+        "at"
+      ]
+    },
+    {
+      "id": "fry022",
+      "type": "readSpeak",
+      "prompt": "be",
+      "answers": [
+        "be"
+      ]
+    },
+    {
+      "id": "fry023",
+      "type": "readSpeak",
+      "prompt": "this",
+      "answers": [
+        "this"
+      ]
+    },
+    {
+      "id": "fry024",
+      "type": "readSpeak",
+      "prompt": "have",
+      "answers": [
+        "have"
+      ]
+    },
+    {
+      "id": "fry025",
+      "type": "readSpeak",
+      "prompt": "from",
+      "answers": [
+        "from"
+      ]
+    },
+    {
+      "id": "fry026",
+      "type": "readSpeak",
+      "prompt": "or",
+      "answers": [
+        "or"
+      ]
+    },
+    {
+      "id": "fry027",
+      "type": "readSpeak",
+      "prompt": "one",
+      "answers": [
+        "one"
+      ]
+    },
+    {
+      "id": "fry028",
+      "type": "readSpeak",
+      "prompt": "had",
+      "answers": [
+        "had"
+      ]
+    },
+    {
+      "id": "fry029",
+      "type": "readSpeak",
+      "prompt": "by",
+      "answers": [
+        "by"
+      ]
+    },
+    {
+      "id": "fry030",
+      "type": "readSpeak",
+      "prompt": "words",
+      "answers": [
+        "words"
+      ]
+    },
+    {
+      "id": "fry031",
+      "type": "readSpeak",
+      "prompt": "but",
+      "answers": [
+        "but"
+      ]
+    },
+    {
+      "id": "fry032",
+      "type": "readSpeak",
+      "prompt": "not",
+      "answers": [
+        "not"
+      ]
+    },
+    {
+      "id": "fry033",
+      "type": "readSpeak",
+      "prompt": "what",
+      "answers": [
+        "what"
+      ]
+    },
+    {
+      "id": "fry034",
+      "type": "readSpeak",
+      "prompt": "all",
+      "answers": [
+        "all"
+      ]
+    },
+    {
+      "id": "fry035",
+      "type": "readSpeak",
+      "prompt": "were",
+      "answers": [
+        "were"
+      ]
+    },
+    {
+      "id": "fry036",
+      "type": "readSpeak",
+      "prompt": "we",
+      "answers": [
+        "we"
+      ]
+    },
+    {
+      "id": "fry037",
+      "type": "readSpeak",
+      "prompt": "when",
+      "answers": [
+        "when"
+      ]
+    },
+    {
+      "id": "fry038",
+      "type": "readSpeak",
+      "prompt": "your",
+      "answers": [
+        "your"
+      ]
+    },
+    {
+      "id": "fry039",
+      "type": "readSpeak",
+      "prompt": "can",
+      "answers": [
+        "can"
+      ]
+    },
+    {
+      "id": "fry040",
+      "type": "readSpeak",
+      "prompt": "said",
+      "answers": [
+        "said"
+      ]
+    },
+    {
+      "id": "fry041",
+      "type": "readSpeak",
+      "prompt": "there",
+      "answers": [
+        "there"
+      ]
+    },
+    {
+      "id": "fry042",
+      "type": "readSpeak",
+      "prompt": "use",
+      "answers": [
+        "use"
+      ]
+    },
+    {
+      "id": "fry043",
+      "type": "readSpeak",
+      "prompt": "an",
+      "answers": [
+        "an"
+      ]
+    },
+    {
+      "id": "fry044",
+      "type": "readSpeak",
+      "prompt": "each",
+      "answers": [
+        "each"
+      ]
+    },
+    {
+      "id": "fry045",
+      "type": "readSpeak",
+      "prompt": "which",
+      "answers": [
+        "which"
+      ]
+    },
+    {
+      "id": "fry046",
+      "type": "readSpeak",
+      "prompt": "she",
+      "answers": [
+        "she"
+      ]
+    },
+    {
+      "id": "fry047",
+      "type": "readSpeak",
+      "prompt": "do",
+      "answers": [
+        "do"
+      ]
+    },
+    {
+      "id": "fry048",
+      "type": "readSpeak",
+      "prompt": "how",
+      "answers": [
+        "how"
+      ]
+    },
+    {
+      "id": "fry049",
+      "type": "readSpeak",
+      "prompt": "their",
+      "answers": [
+        "their"
+      ]
+    },
+    {
+      "id": "fry050",
+      "type": "readSpeak",
+      "prompt": "if",
+      "answers": [
+        "if"
+      ]
+    },
+    {
+      "id": "fry051",
+      "type": "readSpeak",
+      "prompt": "will",
+      "answers": [
+        "will"
+      ]
+    },
+    {
+      "id": "fry052",
+      "type": "readSpeak",
+      "prompt": "up",
+      "answers": [
+        "up"
+      ]
+    },
+    {
+      "id": "fry053",
+      "type": "readSpeak",
+      "prompt": "other",
+      "answers": [
+        "other"
+      ]
+    },
+    {
+      "id": "fry054",
+      "type": "readSpeak",
+      "prompt": "about",
+      "answers": [
+        "about"
+      ]
+    },
+    {
+      "id": "fry055",
+      "type": "readSpeak",
+      "prompt": "out",
+      "answers": [
+        "out"
+      ]
+    },
+    {
+      "id": "fry056",
+      "type": "readSpeak",
+      "prompt": "many",
+      "answers": [
+        "many"
+      ]
+    },
+    {
+      "id": "fry057",
+      "type": "readSpeak",
+      "prompt": "then",
+      "answers": [
+        "then"
+      ]
+    },
+    {
+      "id": "fry058",
+      "type": "readSpeak",
+      "prompt": "them",
+      "answers": [
+        "them"
+      ]
+    },
+    {
+      "id": "fry059",
+      "type": "readSpeak",
+      "prompt": "these",
+      "answers": [
+        "these"
+      ]
+    },
+    {
+      "id": "fry060",
+      "type": "readSpeak",
+      "prompt": "so",
+      "answers": [
+        "so"
+      ]
+    },
+    {
+      "id": "fry061",
+      "type": "readSpeak",
+      "prompt": "some",
+      "answers": [
+        "some"
+      ]
+    },
+    {
+      "id": "fry062",
+      "type": "readSpeak",
+      "prompt": "her",
+      "answers": [
+        "her"
+      ]
+    },
+    {
+      "id": "fry063",
+      "type": "readSpeak",
+      "prompt": "would",
+      "answers": [
+        "would"
+      ]
+    },
+    {
+      "id": "fry064",
+      "type": "readSpeak",
+      "prompt": "make",
+      "answers": [
+        "make"
+      ]
+    },
+    {
+      "id": "fry065",
+      "type": "readSpeak",
+      "prompt": "like",
+      "answers": [
+        "like"
+      ]
+    },
+    {
+      "id": "fry066",
+      "type": "readSpeak",
+      "prompt": "him",
+      "answers": [
+        "him"
+      ]
+    },
+    {
+      "id": "fry067",
+      "type": "readSpeak",
+      "prompt": "into",
+      "answers": [
+        "into"
+      ]
+    },
+    {
+      "id": "fry068",
+      "type": "readSpeak",
+      "prompt": "time",
+      "answers": [
+        "time"
+      ]
+    },
+    {
+      "id": "fry069",
+      "type": "readSpeak",
+      "prompt": "has",
+      "answers": [
+        "has"
+      ]
+    },
+    {
+      "id": "fry070",
+      "type": "readSpeak",
+      "prompt": "look",
+      "answers": [
+        "look"
+      ]
+    },
+    {
+      "id": "fry071",
+      "type": "readSpeak",
+      "prompt": "two",
+      "answers": [
+        "two"
+      ]
+    },
+    {
+      "id": "fry072",
+      "type": "readSpeak",
+      "prompt": "more",
+      "answers": [
+        "more"
+      ]
+    },
+    {
+      "id": "fry073",
+      "type": "readSpeak",
+      "prompt": "write",
+      "answers": [
+        "write"
+      ]
+    },
+    {
+      "id": "fry074",
+      "type": "readSpeak",
+      "prompt": "go",
+      "answers": [
+        "go"
+      ]
+    },
+    {
+      "id": "fry075",
+      "type": "readSpeak",
+      "prompt": "see",
+      "answers": [
+        "see"
+      ]
+    },
+    {
+      "id": "fry076",
+      "type": "readSpeak",
+      "prompt": "number",
+      "answers": [
+        "number"
+      ]
+    },
+    {
+      "id": "fry077",
+      "type": "readSpeak",
+      "prompt": "no",
+      "answers": [
+        "no"
+      ]
+    },
+    {
+      "id": "fry078",
+      "type": "readSpeak",
+      "prompt": "way",
+      "answers": [
+        "way"
+      ]
+    },
+    {
+      "id": "fry079",
+      "type": "readSpeak",
+      "prompt": "could",
+      "answers": [
+        "could"
+      ]
+    },
+    {
+      "id": "fry080",
+      "type": "readSpeak",
+      "prompt": "people",
+      "answers": [
+        "people"
+      ]
+    },
+    {
+      "id": "fry081",
+      "type": "readSpeak",
+      "prompt": "my",
+      "answers": [
+        "my"
+      ]
+    },
+    {
+      "id": "fry082",
+      "type": "readSpeak",
+      "prompt": "than",
+      "answers": [
+        "than"
+      ]
+    },
+    {
+      "id": "fry083",
+      "type": "readSpeak",
+      "prompt": "first",
+      "answers": [
+        "first"
+      ]
+    },
+    {
+      "id": "fry084",
+      "type": "readSpeak",
+      "prompt": "water",
+      "answers": [
+        "water"
+      ]
+    },
+    {
+      "id": "fry085",
+      "type": "readSpeak",
+      "prompt": "been",
+      "answers": [
+        "been"
+      ]
+    },
+    {
+      "id": "fry086",
+      "type": "readSpeak",
+      "prompt": "called",
+      "answers": [
+        "called"
+      ]
+    },
+    {
+      "id": "fry087",
+      "type": "readSpeak",
+      "prompt": "who",
+      "answers": [
+        "who"
+      ]
+    },
+    {
+      "id": "fry088",
+      "type": "readSpeak",
+      "prompt": "am",
+      "answers": [
+        "am"
+      ]
+    },
+    {
+      "id": "fry089",
+      "type": "readSpeak",
+      "prompt": "its",
+      "answers": [
+        "its"
+      ]
+    },
+    {
+      "id": "fry090",
+      "type": "readSpeak",
+      "prompt": "now",
+      "answers": [
+        "now"
+      ]
+    },
+    {
+      "id": "fry091",
+      "type": "readSpeak",
+      "prompt": "find",
+      "answers": [
+        "find"
+      ]
+    },
+    {
+      "id": "fry092",
+      "type": "readSpeak",
+      "prompt": "long",
+      "answers": [
+        "long"
+      ]
+    },
+    {
+      "id": "fry093",
+      "type": "readSpeak",
+      "prompt": "down",
+      "answers": [
+        "down"
+      ]
+    },
+    {
+      "id": "fry094",
+      "type": "readSpeak",
+      "prompt": "day",
+      "answers": [
+        "day"
+      ]
+    },
+    {
+      "id": "fry095",
+      "type": "readSpeak",
+      "prompt": "did",
+      "answers": [
+        "did"
+      ]
+    },
+    {
+      "id": "fry096",
+      "type": "readSpeak",
+      "prompt": "get",
+      "answers": [
+        "get"
+      ]
+    },
+    {
+      "id": "fry097",
+      "type": "readSpeak",
+      "prompt": "come",
+      "answers": [
+        "come"
+      ]
+    },
+    {
+      "id": "fry098",
+      "type": "readSpeak",
+      "prompt": "made",
+      "answers": [
+        "made"
+      ]
+    },
+    {
+      "id": "fry099",
+      "type": "readSpeak",
+      "prompt": "may",
+      "answers": [
+        "may"
+      ]
+    },
+    {
+      "id": "fry100",
+      "type": "readSpeak",
+      "prompt": "part",
+      "answers": [
+        "part"
+      ]
+    }
+  ]
+}

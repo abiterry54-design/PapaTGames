@@ -4,7 +4,9 @@
     let masteredCount = 0;
     const masteryGoal = 2;
     const cardImage = document.getElementById("cardImage");
+    const displayText = document.getElementById("displayText")
     const showButton = document.getElementById("showButton");
+    
     showButton.addEventListener("click", () => {
 
     if (showButton.textContent === "Next") {
@@ -16,8 +18,10 @@
     
 
         async function loadCards(){
-            let response = await fetch("dictionary.json");
-            cards = await response.json();
+            let response = await fetch("fry100.json");
+            let data = await response.json();
+
+            cards = data.items;
             
             for (let i = 0; i < cards.length; i++) {
                 cards[i].correct = 0;
@@ -34,7 +38,28 @@
            setGameState("answer");
         }
 
+        function showText(text) {
+            cardImage.style.display = "none";
+            displayText.style.display = "flex";
+            displayText.textContent = text;
 
+            if (text.length <= 16) {
+                displayText.style.fontSize = "3rem";
+            }
+            else if (text.length <= 30) {
+                displayText.style.fontSize = "2rem";
+            }
+            else {
+                displayText.style.fontSize = "1.3rem";
+            }
+        }
+        
+
+        function showPicture(image) {
+            displayText.style.display = "none";
+            cardImage.style.display="block";
+            cardImage.src = image;
+        }
 
 
         function nextCard() {
@@ -68,7 +93,7 @@
            // document.getElementById("cardImage").style.display = "none";
             document.getElementById("question").innerHTML = cards[currentCard].prompt;
             document.getElementById("answer").innerHTML = "";
-            showDefaultImage();
+            //showDefaultImage();
         }
 
         function showDefaultImage() {
@@ -331,19 +356,21 @@ function checkSpokenAnswer(spokenWord) {
         document.getElementById("answer").innerHTML =
             "Correct!";
 
-            cardImage.src = cards[currentCard].image;
+            if (cards[currentCard].image) {
+                cardImage.src = cards[currentCard].image;
+            }    
             gotIt(false);
             setGameState("readResult");
     }
     else {
 
-        document.getElementById("answer").innerHTML =
-            "Try Again";
+    document.getElementById("answer").innerHTML =
+        'Oops! I heard: "' + spokenWord + '"';
 
-            cardImage.src = cards[currentCard].image;
-            missedIt(false);
-            setGameState("readRetry");
-        }
+    missedIt(false);
+
+    setGameState("readResult");
+    }
 }
 
 
@@ -351,15 +378,25 @@ function checkSpokenAnswer(spokenWord) {
 
 //Startup Here
 
+function beginGame() {
+  document.getElementById("welcomeScreen").style.display = "none";
+  document.getElementById("gameArea").style.display = "block";
+  startGame();
+}
+
 async function startGame() {
     await loadCards();
     loadProgress();
-    shuffleCards();
+    //shuffleCards();
+    //cards = cards.slice(0,25);
     displayCurrentCard();
     updateScore();
     setGameState("readSpeak");
 }
 
-startGame();
+//showText("Because");
+//showPicture("images/papat7.png");
+
+//startGame();
 
 

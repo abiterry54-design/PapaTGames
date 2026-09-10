@@ -42,6 +42,20 @@
     overflow: hidden;
 }
 
+#displayText {
+    display: none;
+
+    width: 100%;
+    height: 100%;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+    font-size: 3rem;
+    font-weight: bold;
+}
+
 .cardImage {
     width: 100%;
     height: 100%;
@@ -53,4 +67,29 @@
     margin-top: -25px;
 }
 
+.welcomeScreen {
+    text-align: center;
+    padding: 25px;
+    max-width: 500px;
+    margin: 20px auto;
+    border-radius: 20px;
+    background: #f5f5f5;
+}
 
+.welcomeScreen h2 {
+    font-size: 2.5rem;
+    margin: 10px;
+}
+
+.welcomeIcons {
+    font-size: 3rem;
+}
+
+.welcomeMessage {
+    font-size: 1.5rem;
+}
+
+.welcomeDeck {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
