@@ -6,6 +6,22 @@
     const cardImage = document.getElementById("cardImage");
     const displayText = document.getElementById("displayText")
     const showButton = document.getElementById("showButton");
+
+    // temp praiseMessages
+    const praiseMessages = [
+    "Very good!",
+    "Great job!",
+    "Laken! You Rock!",
+    "Nice!",
+    "Way to go!",
+    "Well done Laken",
+    "You got it!",
+    "Excellent!",
+    "Good reading!",
+    "That's it!",
+    "Awesome!",
+    "Attaboy!"
+    ];
     
     showButton.addEventListener("click", () => {
 
@@ -65,23 +81,26 @@
         function nextCard() {
             currentCard++;
 
-            if (masteredCount===cards.length) {
-                endRound();
-                return;
-            }
+            //if (masteredCount===cards.length) {
+            //    endRound();
+            //    return;
+            //}
 
             if (currentCard >= cards.length) {
-                shuffleCards();
-                currentCard=0;
+                endRound();
+                return;
+
+                //shuffleCards();
+                //currentCard=0;
             }
 
-            while (cards[currentCard].streak >= masteryGoal) {
-                currentCard++;
-                if (currentCard>=cards.length) {
-                    shuffleCards();
-                    currentCard=0;
-                }
-            }
+            //while (cards[currentCard].streak >= masteryGoal) {
+            //    currentCard++;
+            //    if (currentCard>=cards.length) {
+            //        shuffleCards();
+            //        currentCard=0;
+            //    }
+            //}
   
             displayCurrentCard();
             setGameState("readSpeak");
@@ -358,21 +377,36 @@ function checkSpokenAnswer(spokenWord) {
 
             if (cards[currentCard].image) {
                 cardImage.src = cards[currentCard].image;
-            }    
+            }
+            let word = cards[currentCard].prompt;
+            speakText(word + ". " + getPraise());
+
             gotIt(false);
             setGameState("readResult");
     }
     else {
+        let word = cards[currentCard].prompt;
 
-    document.getElementById("answer").innerHTML =
-        'Oops! I heard: "' + spokenWord + '"';
+        document.getElementById("answer").innerHTML= 'Oops! I heard: "' + spokenWord + '"';
 
-    missedIt(false);
+        speakText(word + ". That's a tough one. Say it with me. " + word);
 
-    setGameState("readResult");
+        missedIt(false);
+        setGameState("readResult");
     }
 }
 
+function speakText(text) {
+
+    let speech = new SpeechSynthesisUtterance(text);
+    window.speechSynthesis.speak(speech);
+}
+
+function getPraise() {
+
+    let randomIndex = Math.floor(Math.random() * praiseMessages.length);
+    return praiseMessages[randomIndex];
+}
 
 
 
@@ -387,8 +421,8 @@ function beginGame() {
 async function startGame() {
     await loadCards();
     loadProgress();
-    //shuffleCards();
-    //cards = cards.slice(0,25);
+    shuffleCards();
+    cards = cards.slice(0,25);
     displayCurrentCard();
     updateScore();
     setGameState("readSpeak");
