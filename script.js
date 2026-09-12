@@ -34,7 +34,7 @@
     
 
         async function loadCards(){
-            let response = await fetch("fry100.json");
+        let response = await fetch("fry100.json?v=2");
             let data = await response.json();
 
             cards = data.items;
