@@ -352,6 +352,13 @@ console.log("Game state:", action);
 
 function startListening() {
 
+    // Wake up speech synthesis while we are inside
+    // a real user button tap
+    const unlockSpeech =
+        new SpeechSynthesisUtterance("");
+
+    window.speechSynthesis.speak(unlockSpeech);
+
     const SpeechRecognition =
         window.SpeechRecognition ||
         window.webkitSpeechRecognition;
@@ -381,9 +388,12 @@ function startListening() {
 
         recognition.stop();
 
-        recognition.onend = function() {
+    recognition.onend = function() {
         console.log("Recognition ended.");
-        checkSpokenAnswer(spokenWord);
+
+
+         setTimeout(function() {
+            checkSpokenAnswer(spokenWord);}, 500);
     };
 };
 
