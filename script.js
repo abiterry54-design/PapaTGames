@@ -2,10 +2,12 @@
     let cards = [];
     let currentCard=0;
     let masteredCount = 0;
+    let firstTryCorrect = 0;
     const masteryGoal = 2;
     const cardImage = document.getElementById("cardImage");
     const displayText = document.getElementById("displayText")
     const showButton = document.getElementById("showButton");
+    const CARDS_PER_ROUND = 20;
 
     // temp praiseMessages
     const praiseMessages = [
@@ -22,6 +24,19 @@
     "Awesome!",
     "Attaboy!"
     ];
+
+    const tryAgainMessages = [
+    "That's a tough one. Say it with me.",
+    "Almost! Let's say it together.",
+    "Good try! Say it with me.",
+    "Let's practice that one together.",
+    "No problem. Try saying it with me.",
+    "Let's work on that one.",
+    "That one can be tricky. Say it with me.",
+    "Good effort! Let's try it together.",
+    "Let's give that word another try.",
+    "Here's that word again. Say it with me."
+];
     
     showButton.addEventListener("click", () => {
 
@@ -109,9 +124,10 @@
 
         function displayCurrentCard() {
             
-           // document.getElementById("cardImage").style.display = "none";
+            // document.getElementById("cardImage").style.display = "none";
             document.getElementById("question").innerHTML = cards[currentCard].prompt;
             document.getElementById("answer").innerHTML = "";
+            updateProgress();
             //showDefaultImage();
         }
 
@@ -135,7 +151,7 @@
             if (cards[currentCard].streak===masteryGoal) {
                 masteredCount++;
             }
-            updateScore();
+            //updateScore();
             saveProgress();
 
             if (advance) {
@@ -146,7 +162,7 @@
         function missedIt(advance= true) {
             cards[currentCard].missed++;
             cards[currentCard].streak=0;
-            updateScore();
+            //updateScore();
             saveProgress();
 
             if (advance) {
@@ -175,8 +191,22 @@
         }
 
         function endRound() {
-            document.getElementById("question").innerHTML="Round Complete!";
-            document.getElementById("answer").innerHTML="";
+
+            let message =
+                "Great job Laken! You finished all " +
+                cards.length +
+                " words! You got " +
+                firstTryCorrect +
+                " on the first try! Let's get some more words and play again!";
+
+            document.getElementById("question").innerHTML =
+                "Round Complete!";
+
+            document.getElementById("answer").innerHTML =
+                message;
+
+            speakText(message);
+
             setGameState("roundComplete");
         }
 
@@ -207,25 +237,31 @@
             localStorage.setItem("learningGameProgress", JSON.stringify(progress));
         } 
         
-    function loadProgress() {
+        function loadProgress() {
 
-        let savedProgress = localStorage.getItem("learningGameProgress");
+            let savedProgress = localStorage.getItem("learningGameProgress");
 
-        if (savedProgress) {
-           let progress = JSON.parse(savedProgress);
+            if (savedProgress) {
+            let progress = JSON.parse(savedProgress);
 
-           for (let i = 0; i < cards.length; i++) {
+            for (let i = 0; i < cards.length; i++) {
 
-                for (let j = 0; j < progress.length; j++) {
+                    for (let j = 0; j < progress.length; j++) {
 
-                    if (cards[i].question === progress[j].id) {
-                        cards[i].correct = progress[j].correct;
-                        cards[i].missed = progress[j].missed;
-                    }
-               }
-           }
+                        if (cards[i].question === progress[j].id) {
+                            cards[i].correct = progress[j].correct;
+                            cards[i].missed = progress[j].missed;
+                        }
+                }
+            }
+            }
+        } 
+        
+        function updateProgress() {
+
+            document.getElementById("score").textContent =
+                (currentCard + 1) + " of " + cards.length;
         }
-    }   
 
         function resetProgress() {
          if (confirm("Are you sure you want to reset all progress?")) {    
@@ -379,7 +415,10 @@ function checkSpokenAnswer(spokenWord) {
                 cardImage.src = cards[currentCard].image;
             }
             let word = cards[currentCard].prompt;
+
             speakText(word + ". " + getPraise());
+
+            firstTryCorrect++;
 
             gotIt(false);
             setGameState("readResult");
@@ -389,7 +428,7 @@ function checkSpokenAnswer(spokenWord) {
 
         document.getElementById("answer").innerHTML= 'Oops! I heard: "' + spokenWord + '"';
 
-        speakText(word + ". That's a tough one. Say it with me. " + word);
+        speakText(word + ". " + getTryAgainMessage() + " " + word );
 
         missedIt(false);
         setGameState("readResult");
@@ -408,7 +447,13 @@ function getPraise() {
     return praiseMessages[randomIndex];
 }
 
+function getTryAgainMessage() {
 
+    let randomIndex =
+        Math.floor(Math.random() * tryAgainMessages.length);
+
+    return tryAgainMessages[randomIndex];
+}
 
 //Startup Here
 
@@ -419,13 +464,15 @@ function beginGame() {
 }
 
 async function startGame() {
+    firstTryCorrect = 0;
     await loadCards();
     loadProgress();
     shuffleCards();
-    cards = cards.slice(0,25);
+    cards = cards.slice(0, CARDS_PER_ROUND);
     displayCurrentCard();
-    updateScore();
+    //updateScore();
     setGameState("readSpeak");
+
 }
 
 //showText("Because");
