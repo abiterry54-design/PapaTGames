@@ -379,8 +379,13 @@ function startListening() {
 
         console.log("Speech heard:", spokenWord);
 
+        recognition.stop();
+
+        recognition.onend = function() {
+        console.log("Recognition ended.");
         checkSpokenAnswer(spokenWord);
     };
+};
 
     recognition.onerror = function(event) {
 
@@ -422,7 +427,7 @@ function checkSpokenAnswer(spokenWord) {
 
             gotIt(false);
             setGameState("readResult");
-    }
+        }
     else {
         let word = cards[currentCard].prompt;
 
@@ -437,7 +442,25 @@ function checkSpokenAnswer(spokenWord) {
 
 function speakText(text) {
 
-    let speech = new SpeechSynthesisUtterance(text);
+    window.speechSynthesis.cancel();
+
+    let speech =
+        new SpeechSynthesisUtterance(text);
+
+    speech.lang = "en-US";
+
+    speech.onstart = function() {
+        console.log("Speech started:", text);
+    };
+
+    speech.onend = function() {
+        console.log("Speech finished.");
+    };
+
+    speech.onerror = function(event) {
+        console.log("Speech synthesis error:", event.error);
+    };
+
     window.speechSynthesis.speak(speech);
 }
 
