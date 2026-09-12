@@ -12,6 +12,9 @@
 
     <button onclick="startListening()">🎤 Speak</button>
 
+    <button id="testVoice">🔊 Test Voice</button>
+    <p id="voiceStatus">Voice waiting...</p>
+
     <p id="status">Press Speak and say a word.</p>
     <p id="heard"></p>
     <p id="result"></p>
@@ -71,6 +74,33 @@
             console.log("Speech error:", event.error);
         };
     }
+
+const testVoiceButton = document.getElementById("testVoice");
+const voiceStatus = document.getElementById("voiceStatus");
+
+testVoiceButton.addEventListener("click", function () {
+
+    voiceStatus.textContent = "Trying to speak...";
+
+    const message = new SpeechSynthesisUtterance(
+        "Hello Laken! Papa T's learning game can talk!"
+    );
+
+    message.onstart = function () {
+        voiceStatus.textContent = "Speech started!";
+    };
+
+    message.onend = function () {
+        voiceStatus.textContent = "Speech finished!";
+    };
+
+    message.onerror = function (event) {
+        voiceStatus.textContent = "Speech error: " + event.error;
+    };
+
+    window.speechSynthesis.cancel();
+    window.speechSynthesis.speak(message);
+});
 </script>
 
 </body>
