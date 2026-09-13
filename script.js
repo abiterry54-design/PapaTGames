@@ -214,6 +214,8 @@
             console.log("startNewRound called");
 
             masteredCount=0;
+            firstTryCorrect = 0;
+
             for (let i = 0; i < cards.length; i++) {
                 cards[i].streak=0;    
             }
@@ -370,7 +372,7 @@ function startListening() {
     recognition.maxAlternatives = 1;
 
     document.getElementById("answer").innerHTML =
-        "Listening...";
+    '<span class="listening">Listening...</span>';
 
     recognition.start();
 
@@ -423,9 +425,19 @@ function checkSpokenAnswer(spokenWord) {
 
     if (normalizedAnswers.includes(spokenWord)) {
 
-        document.getElementById("answer").innerHTML =
-            "Correct!";
+       // document.getElementById("answer").innerHTML ="Correct!";
+        let answers = cards[currentCard].answers;
+        let answerMessage = "Correct!";
 
+        if (answers.length > 1) {
+            answerMessage +=
+                "<br><br>Here are some words that sound alike:<br>" +
+                "<strong>" +
+                answers.join(" &nbsp; • &nbsp; ") +
+                "</strong>";
+        }
+
+        document.getElementById("answer").innerHTML = answerMessage;
             if (cards[currentCard].image) {
                 cardImage.src = cards[currentCard].image;
             }

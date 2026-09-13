@@ -39,7 +39,10 @@
       "type": "readSpeak",
       "prompt": "to",
       "answers": [
-        "to"
+        "to",
+        "too",
+        "two",
+        "2"
       ]
     },
     {
@@ -47,7 +50,8 @@
       "type": "readSpeak",
       "prompt": "in",
       "answers": [
-        "in"
+        "in",
+        "inn"
       ]
     },
     {
@@ -63,7 +67,9 @@
       "type": "readSpeak",
       "prompt": "you",
       "answers": [
-        "you"
+        "you",
+        "ewe",
+        "u"
       ]
     },
     {
@@ -103,7 +109,10 @@
       "type": "readSpeak",
       "prompt": "for",
       "answers": [
-        "for"
+        "for",
+        "four",
+        "fore",
+        "4"
       ]
     },
     {
@@ -119,7 +128,8 @@
       "type": "readSpeak",
       "prompt": "are",
       "answers": [
-        "are"
+        "are",
+        "r"
       ]
     },
     {
@@ -159,7 +169,8 @@
       "type": "readSpeak",
       "prompt": "I",
       "answers": [
-        "I"
+        "I",
+        "eye"
       ]
     },
     {
@@ -175,7 +186,8 @@
       "type": "readSpeak",
       "prompt": "be",
       "answers": [
-        "be"
+        "be",
+        "bee"
       ]
     },
     {
@@ -207,7 +219,9 @@
       "type": "readSpeak",
       "prompt": "or",
       "answers": [
-        "or"
+        "or",
+        "oar",
+        "ore"
       ]
     },
     {
@@ -215,7 +229,9 @@
       "type": "readSpeak",
       "prompt": "one",
       "answers": [
-        "one"
+        "one",
+        "won",
+        "1"
       ]
     },
     {
@@ -231,7 +247,9 @@
       "type": "readSpeak",
       "prompt": "by",
       "answers": [
-        "by"
+        "by",
+        "buy",
+        "bye"
       ]
     },
     {
@@ -247,7 +265,8 @@
       "type": "readSpeak",
       "prompt": "but",
       "answers": [
-        "but"
+        "but",
+        "butt"
       ]
     },
     {
@@ -255,7 +274,8 @@
       "type": "readSpeak",
       "prompt": "not",
       "answers": [
-        "not"
+        "not",
+        "knot"
       ]
     },
     {
@@ -271,7 +291,8 @@
       "type": "readSpeak",
       "prompt": "all",
       "answers": [
-        "all"
+        "all",
+        "awl"
       ]
     },
     {
@@ -279,7 +300,9 @@
       "type": "readSpeak",
       "prompt": "were",
       "answers": [
-        "were"
+        "were",
+        "we're",
+        "where"
       ]
     },
     {
@@ -287,7 +310,8 @@
       "type": "readSpeak",
       "prompt": "we",
       "answers": [
-        "we"
+        "we",
+        "wee"
       ]
     },
     {
@@ -303,7 +327,8 @@
       "type": "readSpeak",
       "prompt": "your",
       "answers": [
-        "your"
+        "your",
+        "you're"
       ]
     },
     {
@@ -327,7 +352,9 @@
       "type": "readSpeak",
       "prompt": "there",
       "answers": [
-        "there"
+        "there",
+        "their",
+        "they're"
       ]
     },
     {
@@ -343,7 +370,9 @@
       "type": "readSpeak",
       "prompt": "an",
       "answers": [
-        "an"
+        "an",
+        "and",
+        "Ann"
       ]
     },
     {
@@ -359,7 +388,8 @@
       "type": "readSpeak",
       "prompt": "which",
       "answers": [
-        "which"
+        "which",
+        "witch"
       ]
     },
     {
@@ -375,7 +405,9 @@
       "type": "readSpeak",
       "prompt": "do",
       "answers": [
-        "do"
+        "do",
+        "dew",
+        "due"
       ]
     },
     {
@@ -391,7 +423,9 @@
       "type": "readSpeak",
       "prompt": "their",
       "answers": [
-        "their"
+        "their",
+        "there",
+        "they're"
       ]
     },
     {
@@ -479,7 +513,9 @@
       "type": "readSpeak",
       "prompt": "so",
       "answers": [
-        "so"
+        "so",
+        "sew",
+        "sow"
       ]
     },
     {
@@ -487,7 +523,8 @@
       "type": "readSpeak",
       "prompt": "some",
       "answers": [
-        "some"
+        "some",
+        "sum"
       ]
     },
     {
@@ -503,7 +540,8 @@
       "type": "readSpeak",
       "prompt": "would",
       "answers": [
-        "would"
+        "would",
+        "wood"
       ]
     },
     {
@@ -527,7 +565,8 @@
       "type": "readSpeak",
       "prompt": "him",
       "answers": [
-        "him"
+        "him",
+        "hymn"
       ]
     },
     {
@@ -543,7 +582,8 @@
       "type": "readSpeak",
       "prompt": "time",
       "answers": [
-        "time"
+        "time",
+        "thyme"
       ]
     },
     {
@@ -567,7 +607,10 @@
       "type": "readSpeak",
       "prompt": "two",
       "answers": [
-        "two"
+        "two",
+        "to",
+        "too",
+        "2"
       ]
     },
     {
@@ -575,7 +618,8 @@
       "type": "readSpeak",
       "prompt": "more",
       "answers": [
-        "more"
+        "more",
+        "moor"
       ]
     },
     {
@@ -583,7 +627,10 @@
       "type": "readSpeak",
       "prompt": "write",
       "answers": [
-        "write"
+        "write",
+        "right",
+        "rite",
+        "wright"
       ]
     },
     {
@@ -599,7 +646,8 @@
       "type": "readSpeak",
       "prompt": "see",
       "answers": [
-        "see"
+        "see",
+        "sea"
       ]
     },
     {
@@ -615,7 +663,8 @@
       "type": "readSpeak",
       "prompt": "no",
       "answers": [
-        "no"
+        "no",
+        "know"
       ]
     },
     {
@@ -623,7 +672,9 @@
       "type": "readSpeak",
       "prompt": "way",
       "answers": [
-        "way"
+        "way",
+        "weigh",
+        "whey"
       ]
     },
     {
@@ -663,7 +714,8 @@
       "type": "readSpeak",
       "prompt": "first",
       "answers": [
-        "first"
+        "first",
+        "1st"
       ]
     },
     {
@@ -679,7 +731,8 @@
       "type": "readSpeak",
       "prompt": "been",
       "answers": [
-        "been"
+        "been",
+        "bin"
       ]
     },
     {
@@ -711,7 +764,8 @@
       "type": "readSpeak",
       "prompt": "its",
       "answers": [
-        "its"
+        "its",
+        "it's"
       ]
     },
     {
@@ -727,7 +781,8 @@
       "type": "readSpeak",
       "prompt": "find",
       "answers": [
-        "find"
+        "find",
+        "fined"
       ]
     },
     {
@@ -783,7 +838,8 @@
       "type": "readSpeak",
       "prompt": "made",
       "answers": [
-        "made"
+        "made",
+        "maid"
       ]
     },
     {

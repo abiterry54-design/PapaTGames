@@ -1,56 +1,46 @@
- body {
+/* =========================================================
+   Papa T's Learning Game
+   style.css
+   Cleaned and organized version
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   1. PAGE BASICS
+   Applies to the whole page.
+   --------------------------------------------------------- */
+
+body {
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
- }
-
- #question {
-  font-size: 48px;  
- }
-
- #displayArea {
-    display: none;
+    margin: 0;
+    padding: 0;
 }
 
- .gameButton {
-    font-size: 25px;
-    padding: 12px;
-    margin: 30px;
-    border-radius: 10px;
-    cursor: pointer;
- }
 
-     #gotItButton, #missedButton {width: 140px;}
+/* ---------------------------------------------------------
+   2. MAIN QUESTION / WORD
+   This is the large word Laken reads.
+   --------------------------------------------------------- */
 
-.card {
-    width: 90%;
-    max-width: 400px;
-    min-height: 200px;
+#question {
+    font-size: 48px;
+    font-weight: bold;
+    margin: 20px 0;
+}
 
-    margin: 30px auto;
-    padding: 20px;
 
-    border: 2px solid black;
-    border-radius: 15px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-   }
+/* ---------------------------------------------------------
+   3. FLEXIBLE DISPLAY AREA
+   Hidden until JavaScript decides to show it.
+   --------------------------------------------------------- */
 
-.imageFrame {
-    width: 90%;
-    max-width: 400px;
-    min-height: 120px;
-    height: auto;
-
-    margin: 15px auto;
-
-    border: 2px solid #333;
-    border-radius: 18px;
-
-    overflow: hidden;
+#displayArea {
+    display: none;
 }
 
 #displayText {
     display: none;
-
     width: 100%;
     min-height: 120px;
     height: auto;
@@ -63,7 +53,56 @@
     font-weight: bold;
 
     padding: 15px;
-    box-sizing: border-box;;
+    box-sizing: border-box;
+}
+
+
+/* ---------------------------------------------------------
+   4. MAIN GAME CARD
+   The central play area.
+   --------------------------------------------------------- */
+
+.card {
+    width: 90%;
+    max-width: 400px;
+    min-height: 200px;
+
+    margin: 30px auto;
+    padding: 20px;
+
+    background: #f9f9f9;
+    border: 2px solid #444;
+    border-radius: 20px;
+
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.18);
+}
+
+/* Listening message while microphone is active */
+.listening {
+    font-size: 1.1rem;
+    font-weight: normal;
+    color: #666;
+}
+
+
+/* ---------------------------------------------------------
+   5. IMAGE AREA
+   Used for Papa T image, card pictures, and other artwork.
+   --------------------------------------------------------- */
+
+.imageFrame {
+    width: 90%;
+    max-width: 400px;
+    min-height: 120px;
+    height: auto;
+
+    margin: 15px auto;
+
+    background: white;
+    border: 2px solid #333;
+    border-radius: 18px;
+
+    overflow: hidden;
 }
 
 .cardImage {
@@ -72,16 +111,52 @@
     object-fit: contain;
 }
 
-.version {
-    font-size: 12px;
-    margin-top: -25px;
+
+/* ---------------------------------------------------------
+   6. ANSWER / RESULT MESSAGE
+   "Correct!", "Try Again", and homophone messages appear here.
+   --------------------------------------------------------- */
+
+#answer {
+    font-size: 1.4rem;
+    line-height: 1.5;
+    margin-top: 20px;
+    min-height: 70px;
 }
+
+
+/* ---------------------------------------------------------
+   7. BUTTONS
+   Shared styling for Speak, Next, Got It, Try Again, etc.
+   --------------------------------------------------------- */
+
+.gameButton {
+    font-size: 25px;
+    padding: 12px 20px;
+    margin: 15px;
+
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+#gotItButton,
+#missedButton {
+    width: 140px;
+}
+
+
+/* ---------------------------------------------------------
+   8. WELCOME SCREEN
+   Start-of-game panel.
+   --------------------------------------------------------- */
 
 .welcomeScreen {
     text-align: center;
+
     padding: 25px;
     max-width: 500px;
     margin: 20px auto;
+
     border-radius: 20px;
     background: #f5f5f5;
 }
@@ -102,4 +177,62 @@
 .welcomeDeck {
     font-size: 1.2rem;
     font-weight: bold;
+}
+
+
+/* ---------------------------------------------------------
+   9. END-OF-ROUND IMAGE
+   Optional class for the "Round Complete!" PNG.
+   If the image already uses class="cardImage", you do not
+   have to change anything. This class is only here if you
+   want the end-round artwork to have its own size later.
+   --------------------------------------------------------- */
+
+.roundCompleteImage {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+
+    display: block;
+    margin: 20px auto;
+
+    border-radius: 18px;
+}
+
+
+/* ---------------------------------------------------------
+   10. VERSION NUMBER
+   Small footer text.
+   --------------------------------------------------------- */
+
+.version {
+    font-size: 12px;
+    margin-top: -25px;
+}
+
+
+/* ---------------------------------------------------------
+   11. SMALL-SCREEN ADJUSTMENTS
+   Keeps the play screen comfortable on an iPhone.
+   --------------------------------------------------------- */
+
+@media (max-width: 500px) {
+
+    #question {
+        font-size: 42px;
+    }
+
+    .gameButton {
+        font-size: 23px;
+        margin: 10px;
+    }
+
+    .card {
+        width: 88%;
+        padding: 16px;
+    }
+
+    #answer {
+        font-size: 1.25rem;
+    }
 }
