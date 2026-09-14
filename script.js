@@ -7,7 +7,13 @@
     const cardImage = document.getElementById("cardImage");
     const displayText = document.getElementById("displayText")
     const showButton = document.getElementById("showButton");
-    const CARDS_PER_ROUND = 20;
+    const CARDS_PER_ROUND = 10;
+    let gameType = "mathFacts";   // "fry100" or "mathFacts"
+    let roundSize = 25;
+    let mathOperators = ["+", "-"];
+    let mathMin = 0;
+    let mathMax = 20;
+    let allowNegatives = false;
 
     // temp praiseMessages
     const praiseMessages = [
@@ -34,8 +40,8 @@
     "Let's work on that one.",
     "That one can be tricky. Say it with me.",
     "Good effort! Let's try it together.",
-    "Let's give that word another try.",
-    "Here's that word again. Say it with me."
+    "Let's give that another try.",
+    "Here's that again. Say it with me."
 ];
     
     showButton.addEventListener("click", () => {
@@ -195,15 +201,17 @@
             let message =
                 "Great job Laken! You finished all " +
                 cards.length +
-                " words! You got " +
+                "! You got " +
                 firstTryCorrect +
-                " on the first try! Let's get some more words and play again!";
+                " on the first try! Let's get some more and play again!";
 
             document.getElementById("question").innerHTML =
                 "Round Complete!";
 
             document.getElementById("answer").innerHTML =
                 message;
+
+            cardImage.src = "images/endround.png";
 
             speakText(message);
 
@@ -411,10 +419,12 @@ function startListening() {
     };
 }
 
+
 function checkSpokenAnswer(spokenWord) {
+    let card = cards[currentCard];
 
     let normalizedAnswers =
-        cards[currentCard].answers.map(answer =>
+        card.answers.map(answer =>
             answer.trim().toLowerCase()
         );
 
@@ -425,37 +435,88 @@ function checkSpokenAnswer(spokenWord) {
 
     if (normalizedAnswers.includes(spokenWord)) {
 
-       // document.getElementById("answer").innerHTML ="Correct!";
-        let answers = cards[currentCard].answers;
-        let answerMessage = "Correct!";
 
-        if (answers.length > 1) {
-            answerMessage +=
-                "<br><br>Here are some words that sound alike:<br>" +
-                "<strong>" +
-                answers.join(" &nbsp; • &nbsp; ") +
-                "</strong>";
+let answers = card.answers;
+let answerMessage;
+
+if (card.type === "mathFact") {
+    answerMessage =
+        "<strong>" +
+        card.prompt + " " + answers[0] +
+        "</strong><br><br>Correct!";
+}
+else {
+    answerMessage = "Correct!";
+
+    if (answers.length > 1) {
+        answerMessage +=
+            "<br><br>Here are some words that sound alike:<br>" +
+            "<strong>" +
+            answers.join(" &nbsp; • &nbsp; ") +
+            "</strong>";
+    }
+}
+
+    document.getElementById("answer").innerHTML = answerMessage;
+
+
+        if (card.image) {
+            cardImage.src = card.image;
         }
 
-        document.getElementById("answer").innerHTML = answerMessage;
-            if (cards[currentCard].image) {
-                cardImage.src = cards[currentCard].image;
-            }
-            let word = cards[currentCard].prompt;
+        if (card.type === "mathFact") {
+            let spokenProblem = getMathSpokenPrompt(card);
+            let correctAnswer = card.answers[0];
 
-            speakText(word + ". " + getPraise());
-
-            firstTryCorrect++;
-
-            gotIt(false);
-            setGameState("readResult");
+            speakText(
+                spokenProblem + " " +
+                correctAnswer + ". " +
+                getPraise()
+            );
         }
+
+        else {
+            speakText(card.prompt + ". " + getPraise());
+        }
+
+        firstTryCorrect++;
+
+        gotIt(false);
+        setGameState("readResult");
+    }
     else {
-        let word = cards[currentCard].prompt;
 
-        document.getElementById("answer").innerHTML= 'Oops! I heard: "' + spokenWord + '"';
+        if (card.type === "mathFact") {
+            document.getElementById("answer").innerHTML =
+                "<strong>" +
+                card.prompt + " " + card.answers[0] +
+                "</strong><br><br>" +
+                'Oops! I heard: "' + spokenWord + '"';
+        }
+        else {
+            document.getElementById("answer").innerHTML =
+                'Oops! I heard: "' + spokenWord + '"';
+        }
 
-        speakText(word + ". " + getTryAgainMessage() + " " + word );
+        if (card.type === "mathFact") {
+            let spokenProblem = getMathSpokenPrompt(card);
+            let correctAnswer = card.answers[0];
+
+            speakText(
+                getTryAgainMessage() + " " +
+                spokenProblem + " " +
+                correctAnswer
+            );
+        }
+        else {
+            let word = card.prompt;
+
+            speakText(
+                word + ". " +
+                getTryAgainMessage() + " " +
+                word
+            );
+        }
 
         missedIt(false);
         setGameState("readResult");
@@ -508,21 +569,70 @@ function beginGame() {
   startGame();
 }
 
+function getMathSpokenPrompt(card) {
+    return card.prompt
+        .replace("+", " plus ")
+        .replace("-", " minus ")
+        .replace("=", " equals ");
+}
+
 async function startGame() {
     firstTryCorrect = 0;
-    await loadCards();
+
+    if (gameType === "mathFacts") {
+        cards = generateMathFacts();
+    } else {
+        await loadCards();
+    }
+
     loadProgress();
     shuffleCards();
     cards = cards.slice(0, CARDS_PER_ROUND);
-    displayCurrentCard();
-    //updateScore();
-    setGameState("readSpeak");
 
+    displayCurrentCard();
+    // updateScore();
+    setGameState("readSpeak");
 }
 
 //showText("Because");
 //showPicture("images/papat7.png");
-
 //startGame();
 
+function generateMathFacts() {
+    let mathCards = [];
+
+    for (let i = 0; i < roundSize; i++) {
+        let operator =
+            mathOperators[Math.floor(Math.random() * mathOperators.length)];
+
+        let num1 =
+            Math.floor(Math.random() * (mathMax - mathMin + 1)) + mathMin;
+
+        let num2 =
+            Math.floor(Math.random() * (mathMax - mathMin + 1)) + mathMin;
+
+        if (operator === "-" && !allowNegatives && num2 > num1) {
+            let temp = num1;
+            num1 = num2;
+            num2 = temp;
+        }
+
+        let answer;
+
+        if (operator === "+") {
+            answer = num1 + num2;
+        } else {
+            answer = num1 - num2;
+        }
+
+        mathCards.push({
+            id: String(i + 1).padStart(3, "0"),
+            type: "mathFact",
+            prompt: `${num1} ${operator} ${num2} =`,
+            answers: [String(answer)]
+        });
+    }
+
+    return mathCards;
+}
 
