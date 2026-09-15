@@ -8,7 +8,7 @@
     const displayText = document.getElementById("displayText")
     const showButton = document.getElementById("showButton");
     const CARDS_PER_ROUND = 10;
-    let gameType = "mathFacts";   // "fry100" or "mathFacts"
+    let gameType = "";   // "fry100" or "mathFacts" set in beginGame(selectedGame)
     let roundSize = 25;
     let mathOperators = ["+", "-"];
     let mathMin = 0;
@@ -285,8 +285,10 @@
         }
 
     function setGameState(action) {
+        document.getElementById("wordsAgainButton").style.display = "none";
+        document.getElementById("mathAgainButton").style.display = "none";
 
-console.log("Game state:", action);
+        console.log("Game state:", action);
 
         switch (action) {
 
@@ -295,7 +297,7 @@ console.log("Game state:", action);
             document.getElementById("showButton").style.display = "inline-block";
             document.getElementById("gotItButton").style.display = "none";
             document.getElementById("missedButton").style.display = "none";
-            document.getElementById("playAgainButton").style.display = "none";
+;
             showButton.textContent = "Show Answer";
             break;
 
@@ -304,7 +306,6 @@ console.log("Game state:", action);
             document.getElementById("showButton").style.display = "none";
             document.getElementById("gotItButton").style.display = "inline-block";
             document.getElementById("missedButton").style.display = "inline-block";
-            document.getElementById("playAgainButton").style.display = "none";
             break;
 
         case "roundComplete":
@@ -312,7 +313,8 @@ console.log("Game state:", action);
             document.getElementById("showButton").style.display = "none";
             document.getElementById("gotItButton").style.display = "none";
             document.getElementById("missedButton").style.display = "none";
-            document.getElementById("playAgainButton").style.display = "inline-block";
+            document.getElementById("wordsAgainButton").style.display = "inline-block";
+            document.getElementById("mathAgainButton").style.display = "inline-block";
             break;
             
         case "readSpeak":
@@ -321,7 +323,6 @@ console.log("Game state:", action);
             document.getElementById("showButton").style.display = "none";
             document.getElementById("gotItButton").style.display = "none";
             document.getElementById("missedButton").style.display = "none";
-            document.getElementById("playAgainButton").style.display = "none";
             break;
 
         case "readResult":
@@ -331,7 +332,7 @@ console.log("Game state:", action);
             document.getElementById("showButton").style.display = "inline-block";
             document.getElementById("gotItButton").style.display = "none";
             document.getElementById("missedButton").style.display = "none";
-            document.getElementById("playAgainButton").style.display = "none";
+
             showButton.textContent = "Next";
             break;
 
@@ -341,7 +342,7 @@ console.log("Game state:", action);
             document.getElementById("showButton").style.display = "none";
             document.getElementById("gotItButton").style.display = "none";
             document.getElementById("missedButton").style.display = "none";
-            document.getElementById("playAgainButton").style.display = "none";
+
             break;
             
             case "readRetry":
@@ -349,13 +350,20 @@ console.log("Game state:", action);
             document.getElementById("showButton").style.display = "none";
             document.getElementById("gotItButton").style.display = "none";
             document.getElementById("missedButton").style.display = "none";
-            document.getElementById("playAgainButton").style.display = "none";
+
             break;
 
 
         }
     } 
+
+function beginNextGame(selectedGame) {
+    gameType = selectedGame;
+    startGame();
+}
     
+
+
 // --------------------
 // SPEECH RECOGNITION
 // --------------------
@@ -563,10 +571,12 @@ function getTryAgainMessage() {
 
 //Startup Here
 
-function beginGame() {
-  document.getElementById("welcomeScreen").style.display = "none";
-  document.getElementById("gameArea").style.display = "block";
-  startGame();
+function beginGame(selectedGame) {
+    gameType=selectedGame;
+
+    document.getElementById("welcomeScreen").style.display = "none";
+    document.getElementById("gameArea").style.display = "block";
+    startGame();
 }
 
 function getMathSpokenPrompt(card) {
@@ -578,7 +588,8 @@ function getMathSpokenPrompt(card) {
 
 async function startGame() {
     firstTryCorrect = 0;
-
+    currentCard = 0;
+    
     if (gameType === "mathFacts") {
         cards = generateMathFacts();
     } else {

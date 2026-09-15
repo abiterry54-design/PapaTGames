@@ -14,21 +14,21 @@
     <div id="welcomeScreen" class="welcomeScreen">
 
         <div class="welcomeIcons">
-            📚 ⭐ 🎤
+            📚 ⭐ 🔢
         </div>
 
         <h2>Hi Laken!</h2>
 
         <p class="welcomeMessage">
-            Ready for a reading challenge?
+            What do you want to practice?
         </p>
 
-        <p class="welcomeDeck">
-            Fry 100 Word Review
-        </p>
+        <button class="gameButton" onclick="beginGame('fry100')">
+            📚 Words
+        </button>
 
-        <button class="gameButton" onclick="beginGame()">
-            Start Game!
+        <button class="gameButton" onclick="beginGame('mathFacts')">
+            🔢 Math
         </button>
 
     </div>
@@ -71,10 +71,16 @@
             Try Again
         </button>
 
-        <button id="playAgainButton"
+        <button id="wordsAgainButton"
                 class="gameButton"
-                onclick="startNewRound()">
-            Play Again
+                onclick="beginNextGame('fry100')">
+            📚 Words
+        </button>
+
+        <button id="mathAgainButton"
+                class="gameButton"
+                onclick="beginNextGame('mathFacts')">
+            🔢 Math
         </button>
 
         <button id="speakButton"
