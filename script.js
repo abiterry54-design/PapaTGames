@@ -3,13 +3,15 @@
     let currentCard=0;
     let masteredCount = 0;
     let firstTryCorrect = 0;
+    let mathRetryCount = 0;
+    const mathRetryLimit = 5;
     const masteryGoal = 2;
     const cardImage = document.getElementById("cardImage");
     const displayText = document.getElementById("displayText")
     const showButton = document.getElementById("showButton");
-    const CARDS_PER_ROUND = 10;
+    const CARDS_PER_ROUND = 20;
     let gameType = "";   // "fry100" or "mathFacts" set in beginGame(selectedGame)
-    let roundSize = 25;
+    let roundSize = 20;
     let mathOperators = ["+", "-"];
     let mathMin = 0;
     let mathMax = 20;
@@ -25,7 +27,7 @@
     "Well done Laken",
     "You got it!",
     "Excellent!",
-    "Good reading!",
+    "What a brain!",
     "That's it!",
     "Awesome!",
     "Attaboy!"
@@ -284,78 +286,77 @@
          }
         }
 
-    function setGameState(action) {
-        document.getElementById("wordsAgainButton").style.display = "none";
-        document.getElementById("mathAgainButton").style.display = "none";
+function setGameState(action) {
 
-        console.log("Game state:", action);
+    console.log("Game state:", action);
 
-        switch (action) {
+    // -----------------------------------------
+    // DEFAULT STATE
+    // Hide every game button first.
+    // Each state below turns on only what it needs.
+    // -----------------------------------------
+
+    document.getElementById("speakButton").style.display = "none";
+    document.getElementById("showButton").style.display = "none";
+    document.getElementById("gotItButton").style.display = "none";
+    document.getElementById("missedButton").style.display = "none";
+    document.getElementById("wordsAgainButton").style.display = "none";
+    document.getElementById("mathAgainButton").style.display = "none";
+
+
+    switch (action) {
+
+        case "buttonsOff":
+            // All buttons were already turned off above.
+            // Nothing to turn back on.
+            break;
 
         case "question":
-            document.getElementById("speakButton").style.display = "inline-block";
-            document.getElementById("showButton").style.display = "inline-block";
-            document.getElementById("gotItButton").style.display = "none";
-            document.getElementById("missedButton").style.display = "none";
-;
+            speakButton.style.display = "inline-block";
+            showButton.style.display = "inline-block";
             showButton.textContent = "Show Answer";
             break;
 
+
         case "answer":
-            document.getElementById("speakButton").style.display = "inline-block";
-            document.getElementById("showButton").style.display = "none";
-            document.getElementById("gotItButton").style.display = "inline-block";
-            document.getElementById("missedButton").style.display = "inline-block";
+            speakButton.style.display = "inline-block";
+            gotItButton.style.display = "inline-block";
+            missedButton.style.display = "inline-block";
             break;
 
-        case "roundComplete":
-            document.getElementById("speakButton").style.display = "none";
-            document.getElementById("showButton").style.display = "none";
-            document.getElementById("gotItButton").style.display = "none";
-            document.getElementById("missedButton").style.display = "none";
-            document.getElementById("wordsAgainButton").style.display = "inline-block";
-            document.getElementById("mathAgainButton").style.display = "inline-block";
-            break;
-            
+
         case "readSpeak":
-            // Read → Speak: child sees the word and presses Speak
-            document.getElementById("speakButton").style.display = "inline-block";
-            document.getElementById("showButton").style.display = "none";
-            document.getElementById("gotItButton").style.display = "none";
-            document.getElementById("missedButton").style.display = "none";
+            // Child sees word and may press Speak
+            speakButton.style.display = "inline-block";
             break;
+
 
         case "readResult":
-            // Read → Speak: answer has been checked
-            // Later showButton will become our Next button
-            document.getElementById("speakButton").style.display = "none";
-            document.getElementById("showButton").style.display = "inline-block";
-            document.getElementById("gotItButton").style.display = "none";
-            document.getElementById("missedButton").style.display = "none";
-
+            // Speech result is complete.
+            // Child may advance to next word.
+            showButton.style.display = "inline-block";
             showButton.textContent = "Next";
             break;
 
+
+        case "readRetry":
+            // Child may try the word again.
+            speakButton.style.display = "inline-block";
+            break;
+
+
         case "seeSpeak":
-            // See → Say: child sees picture and presses Speak
-            document.getElementById("speakButton").style.display = "inline-block";
-            document.getElementById("showButton").style.display = "none";
-            document.getElementById("gotItButton").style.display = "none";
-            document.getElementById("missedButton").style.display = "none";
-
-            break;
-            
-            case "readRetry":
-            document.getElementById("speakButton").style.display = "inline-block";
-            document.getElementById("showButton").style.display = "none";
-            document.getElementById("gotItButton").style.display = "none";
-            document.getElementById("missedButton").style.display = "none";
-
+            // Child sees picture and may press Speak.
+            speakButton.style.display = "inline-block";
             break;
 
 
-        }
-    } 
+        case "roundComplete":
+            wordsAgainButton.style.display = "inline-block";
+            mathAgainButton.style.display = "inline-block";
+            break;
+    }
+} 
 
 function beginNextGame(selectedGame) {
     gameType = selectedGame;
@@ -431,6 +432,94 @@ function startListening() {
 function checkSpokenAnswer(spokenWord) {
     let card = cards[currentCard];
 
+    // For math facts, convert spoken number words
+    // to numbers before checking the answer.
+    if (card.type === "mathFact") {
+
+        let spokenNumber =
+            spokenNumberToNumber(spokenWord);
+
+        // Speech was heard, but it wasn't
+        // something we recognize as a number.
+   
+if (spokenNumber === null) {
+
+    mathRetryCount++;
+
+    console.log(
+        "Math speech not understood:",
+        spokenWord,
+        "Retry:",
+        mathRetryCount,
+        "of",
+        mathRetryLimit
+    );
+
+    // Try automatically until we reach the limit
+    if (mathRetryCount < mathRetryLimit) {
+
+        document.getElementById("answer").innerHTML =
+            "I didn't understand that. Try again.";
+
+        setGameState("buttonsOff");
+
+        speakText(
+            "I didn't understand that. Try again.",
+            function() {
+                setTimeout(startListening, 500);
+            }
+        );
+
+        return;
+    }
+
+    // We reached the retry limit.
+    // Stop listening and let Laken restart when ready.
+    mathRetryCount = 0;
+
+    document.getElementById("answer").innerHTML =
+        "Press Speak when you're ready.";
+
+    setGameState("readRetry");
+
+    speakText(
+        "I'm having trouble hearing you. Press Speak when you're ready."
+    );
+
+    return;
+}
+
+        // We successfully heard a number,
+        // so reset the retry counter.
+        mathRetryCount = 0;
+
+        // Example: "sixteen" becomes "16"
+        spokenWord = String(spokenNumber);
+    }
+
+        // ---------------------------------
+        // WORDS: nothing was heard
+        // ---------------------------------
+        if (card.type !== "mathFact" && spokenWord === "") {
+
+            console.log("Word speech was empty - trying again.");
+
+            document.getElementById("answer").innerHTML =
+                "I didn't hear you. Try again.";
+
+            setGameState("buttonsOff");
+
+            speakText(
+                "I didn't hear you. Try again.",
+                function() {
+                    setTimeout(startListening, 500);
+                }
+            );
+
+            return;
+        }
+
+
     let normalizedAnswers =
         card.answers.map(answer =>
             answer.trim().toLowerCase()
@@ -476,21 +565,34 @@ else {
             let spokenProblem = getMathSpokenPrompt(card);
             let correctAnswer = card.answers[0];
 
+            setGameState("buttonsOff");
+
             speakText(
                 spokenProblem + " " +
                 correctAnswer + ". " +
-                getPraise()
+                getPraise(),
+                function() {
+                    setGameState("readResult");
+                }
             );
         }
 
         else {
-            speakText(card.prompt + ". " + getPraise());
+            setGameState("buttonsOff");
+
+            speakText(
+                card.prompt + ". " + getPraise(),
+                function() {
+                    setGameState("readResult");
+                }
+            );
         }
 
         firstTryCorrect++;
 
         gotIt(false);
-        setGameState("readResult");
+        
+
     }
     else {
 
@@ -510,28 +612,37 @@ else {
             let spokenProblem = getMathSpokenPrompt(card);
             let correctAnswer = card.answers[0];
 
+            setGameState("buttonsOff");
+
             speakText(
                 getTryAgainMessage() + " " +
                 spokenProblem + " " +
-                correctAnswer
+                correctAnswer,
+                function() {
+                    setGameState("readResult");
+                }
             );
         }
         else {
             let word = card.prompt;
 
+            setGameState("buttonsOff");
+
             speakText(
                 word + ". " +
                 getTryAgainMessage() + " " +
-                word
+                word,
+                function() {
+                    setGameState("readResult");
+                }
             );
         }
 
         missedIt(false);
-        setGameState("readResult");
     }
 }
 
-function speakText(text) {
+function speakText(text, onFinished) {
 
     window.speechSynthesis.cancel();
 
@@ -546,10 +657,17 @@ function speakText(text) {
 
     speech.onend = function() {
         console.log("Speech finished.");
+
+        if (onFinished) {
+            onFinished();
+        }
     };
 
     speech.onerror = function(event) {
-        console.log("Speech synthesis error:", event.error);
+        console.log(
+            "Speech synthesis error:",
+            event.error
+        );
     };
 
     window.speechSynthesis.speak(speech);
@@ -589,7 +707,7 @@ function getMathSpokenPrompt(card) {
 async function startGame() {
     firstTryCorrect = 0;
     currentCard = 0;
-    
+
     if (gameType === "mathFacts") {
         cards = generateMathFacts();
     } else {
@@ -645,5 +763,70 @@ function generateMathFacts() {
     }
 
     return mathCards;
+}
+
+function spokenNumberToNumber(spokenWord) {
+    if (
+        spokenWord === null ||
+        spokenWord === undefined ||
+        spokenWord.trim() === ""
+    ) {
+        console.log("Empty speech - not a number");
+        return null;
+    }
+
+    const numbers = {
+        "zero": 0,
+        "one": 1,
+        "two": 2,
+        "three": 3,
+        "four": 4,
+        "five": 5,
+        "six": 6,
+        "seven": 7,
+        "eight": 8,
+        "nine": 9,
+        "ten": 10,
+        "eleven": 11,
+        "twelve": 12,
+        "thirteen": 13,
+        "fourteen": 14,
+        "fifteen": 15,
+        "sixteen": 16,
+        "seventeen": 17,
+        "eighteen": 18,
+        "nineteen": 19,
+        "twenty": 20
+    };
+
+    // Recognition already returned digits
+    if (!isNaN(spokenWord)) {
+        console.log(
+            'Spoken number already numeric:',
+            spokenWord
+        );
+
+        return Number(spokenWord);
+    }
+
+    // Recognition returned a number word
+    if (numbers.hasOwnProperty(spokenWord)) {
+
+        console.log(
+            'Converted spoken number:',
+            spokenWord,
+            '→',
+            numbers[spokenWord]
+        );
+
+        return numbers[spokenWord];
+    }
+
+    console.log(
+        'Not recognized as a number:',
+        spokenWord
+    );
+
+    return null;
 }
 
