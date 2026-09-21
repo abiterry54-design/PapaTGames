@@ -14,7 +14,7 @@
     let roundSize = 20;
     let mathOperators = ["+", "-"];
     let mathMin = 0;
-    let mathMax = 20;
+    let mathMax = 100;
     let allowNegatives = false;
 
     // temp praiseMessages
