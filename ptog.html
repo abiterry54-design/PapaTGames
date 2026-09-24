@@ -1,0 +1,46 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Orion's Game</title>
+    <link rel="stylesheet" href="ptog.css">
+</head>
+
+<body>
+    <main class="game">
+
+        <h1 id="heading">Hi Orion! 👋</h1>
+
+        <div id="welcomeScreen">
+            <button id="startButton">LET'S PLAY!</button>
+        </div>
+
+        <div id="gameScreen" hidden>
+            <h2 id="question"></h2>
+
+            <div id="choices"></div>
+
+            <p id="feedback" aria-live="polite"></p>
+        </div>
+
+        
+        <div id="roundCompleteScreen" hidden>
+            <h2>⭐ Round Complete! ⭐</h2>
+
+            <p id="roundMessage"></p>
+
+            <button id="playAgainButton">
+                PLAY AGAIN!
+            </button>
+        </div>
+   
+
+    </main>
+
+    <script src="ptog.js?v=1"></script>
+</body>
+</html>

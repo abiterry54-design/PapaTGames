@@ -1,0 +1,26 @@
+
+{
+  "praise": [
+    "Great job!",
+    "You got it!",
+    "Excellent!",
+    "Way to go!",
+    "That's right!",
+    "Fantastic!",
+    "You're doing great!",
+    "Good thinking!",
+    "Wonderful!",
+    "Great job, {name}!"
+  ],
+  "tryAgain": [
+    "Try again!",
+    "Almost! Give it another try.",
+    "Have another go!",
+    "Let's try that one again."
+  ],
+  "roundComplete": [
+    "Great job, {name}! You answered all the questions!",
+    "Fantastic! You did it!",
+    "Wonderful work, {name}! Let's play again!"
+  ]
+}

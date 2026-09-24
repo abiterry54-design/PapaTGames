@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terry's Learning Game</title>
+    <link rel="stylesheet" href="style.css?v=4">
+</head>
+
+<body>
+
+    <h1>Papa T's Learning Game!</h1>
+    <p class="version">2.1</p>
+
+    <div id="welcomeScreen" class="welcomeScreen">
+
+        <div class="welcomeIcons">
+            📚 ⭐ 🔢
+        </div>
+
+        <h2>Hi Laken!</h2>
+
+        <p class="welcomeMessage">
+            What do you want to practice?
+        </p>
+
+        <button class="gameButton" onclick="beginGame('fry100')">
+            📚 Words
+        </button>
+
+        <button class="gameButton" onclick="beginGame('mathFacts')">
+            🔢 Math
+        </button>
+
+    </div>
+
+
+    <div id="gameArea" style="display:none;">
+
+        <div class="imageFrame" id="displayArea">
+
+            <img id="cardImage"
+                 class="cardImage"
+                 src=""
+                 alt="">
+
+            <div id="displayText"></div>
+
+        </div>
+
+
+        <div class="card">
+            <h2 id="question"></h2>
+            <h2 id="answer"></h2>
+        </div>
+
+
+        <button id="showButton"
+                class="gameButton">
+            Show Answer
+        </button>
+
+        <button id="gotItButton"
+                class="gameButton"
+                onclick="gotIt()">
+            Got It!
+        </button>
+
+        <button id="missedButton"
+                class="gameButton"
+                onclick="missedIt()">
+            Try Again
+        </button>
+
+        <button id="wordsAgainButton"
+                class="gameButton"
+                onclick="beginNextGame('fry100')">
+            📚 Words
+        </button>
+
+        <button id="mathAgainButton"
+                class="gameButton"
+                onclick="beginNextGame('mathFacts')">
+            🔢 Math
+        </button>
+
+        <button id="speakButton"
+                class="gameButton"
+                onclick="startListening()">
+            🎤 Speak
+        </button>
+
+        <p id="score"></p>
+
+    </div>
+
+
+    <!-- For clearing out array in localStorage
+    <button class="gameButton"
+            onclick="resetProgress()">
+        Reset Progress
+    </button>
+    -->
+
+
+    <!-- For stepping through a deck
+    <button class="gameButton"
+            onclick="nextCard()">
+        Next Card
+    </button>
+    -->
+
+
+    <script src="script.js?v=200b"></script>
+
+</body>
+</html>

@@ -1,0 +1,11 @@
+
+{
+  "cardsPerRound": 12,
+  "activities": [
+    {
+      "type": "findShape",
+      "prompt": "Find the {shape}!",
+      "shapes": ["circle", "square", "triangle", "diamond"]
+    }
+  ]
+}

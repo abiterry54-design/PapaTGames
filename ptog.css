@@ -1,0 +1,115 @@
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f0f8ff;
+    text-align: center;
+}
+
+.game {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 42px;
+    color: #2863a5;
+}
+
+h2 {
+    font-size: 30px;
+}
+
+#startButton {
+    margin-top: 60px;
+    padding: 28px 48px;
+    font-size: 36px;
+    color: white;
+    background: #278447;
+    border: none;
+    border-radius: 22px;
+}
+
+#choices {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 22px;
+    margin-top: 35px;
+}
+
+.choiceButton {
+    width: 140px;
+    height: 150px;
+    background: white;
+    border: 4px solid #8aa6c5;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.choiceButton:disabled {
+    opacity: 0.65;
+}
+
+.shape {
+    width: 90px;
+    height: 90px;
+    background: #e74c3c;
+}
+
+.circle {
+    border-radius: 50%;
+}
+
+.square {
+    border-radius: 4px;
+}
+
+.triangle {
+    background: none;
+    width: 0;
+    height: 0;
+    border-left: 48px solid transparent;
+    border-right: 48px solid transparent;
+    border-bottom: 90px solid #e74c3c;
+}
+
+#feedback {
+    font-size: 28px;
+    font-weight: bold;
+    min-height: 40px;
+    color: #278447;
+}
+
+
+#roundCompleteScreen {
+    margin-top: 50px;
+}
+
+#roundMessage {
+    font-size: 28px;
+}
+
+#playAgainButton {
+    padding: 28px 48px;
+    font-size: 32px;
+    color: white;
+    background: #278447;
+    border: none;
+    border-radius: 22px;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+.diamond {
+    width: 65px;
+    height: 65px;
+    background: #e74c3c;
+    transform: rotate(45deg);
+}

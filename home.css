@@ -1,0 +1,71 @@
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #eaf5ff;
+    text-align: center;
+}
+
+.home {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 52px;
+    color: #2863a5;
+}
+
+h2 {
+    font-size: 26px;
+}
+
+p {
+    font-size: 24px;
+}
+
+.studentButtons,
+.gameButtons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin: 24px 0;
+}
+
+button {
+    font-size: 25px;
+    padding: 20px 28px;
+    border: none;
+    border-radius: 16px;
+    background: #4384cf;
+    color: white;
+    cursor: pointer;
+}
+
+button.selected {
+    background: #24834b;
+}
+
+.gameButtons {
+    flex-direction: column;
+    align-items: center;
+}
+
+.gameButtons button {
+    width: 100%;
+    max-width: 350px;
+    min-height: 90px;
+}
+
+button:disabled {
+    background: #aeb8c3;
+    cursor: not-allowed;
+}
+
+small {
+    display: block;
+    font-size: 15px;
+    margin-top: 8px;
+}
