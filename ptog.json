@@ -1,6 +1,5 @@
-
 {
-  "cardsPerRound": 12,
+  "cardsPerRound": 15,
   "activities": [
     {
       "type": "findShape",
@@ -11,6 +10,12 @@
       "type": "findColor",
       "prompt": "Find the {color} square!",
       "shape": "square",
+      "colors": ["red", "blue", "yellow", "green"]
+    },
+    {
+      "type": "findColoredShape",
+      "prompt": "Find the {color} {shape}!",
+      "shapes": ["circle", "square", "triangle", "diamond"],
       "colors": ["red", "blue", "yellow", "green"]
     }
   ]

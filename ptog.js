@@ -23,7 +23,7 @@ const roundCompleteScreen = document.getElementById("roundCompleteScreen");
 const roundMessage = document.getElementById("roundMessage");
 const playAgainButton = document.getElementById("playAgainButton");
 
-
+let activityDeck = [];
 let activities = [];
 const colorValues = {
     red: "#e74c3c",
@@ -163,15 +163,28 @@ function generateColorCard(activity) {
 
 
 
-
-
 function startGame() {
+
     completedCards = 0;
     lastShape = null;
-    lastColor = null;    
+    lastColor = null;
+
+    // Build a balanced deck of 15 activities.
+    activityDeck = [];
+
+    activities.forEach(activity => {
+        for (let i = 0; i < 5; i++) {
+            activityDeck.push(activity);
+        }
+    });
+
+    // Mix all three games together.
+    activityDeck = shuffle(activityDeck);
+
     welcomeScreen.hidden = true;
     roundCompleteScreen.hidden = true;
     gameScreen.hidden = false;
+
     nextCard();
 }
 
@@ -180,9 +193,7 @@ function nextCard() {
     acceptingAnswers = false;
     feedback.textContent = "";
 
-    const activity = activities[
-        Math.floor(Math.random() * activities.length)
-    ];
+    const activity = activityDeck[completedCards];
 
     const card = generateCard(activity);
 
@@ -196,11 +207,10 @@ function nextCard() {
         const button = document.createElement("button");
         button.className = "choiceButton";
         button.disabled = true;
+
         button.setAttribute(
             "aria-label",
-            activity.type === "findShape"
-                ? choice.shape
-                : choice.color
+            choice.color + " " + choice.shape
         );
 
         const shape = document.createElement("div");
@@ -324,12 +334,17 @@ function generateShapeCard(activity) {
 
 
 function generateCard(activity) {
+
     switch (activity.type) {
+
         case "findShape":
             return generateShapeCard(activity);
 
         case "findColor":
             return generateColorCard(activity);
+
+        case "findColoredShape":
+            return generateColoredShapeCard(activity);
 
         default:
             throw new Error(
@@ -338,3 +353,77 @@ function generateCard(activity) {
     }
 }
 
+function generateColoredShapeCard(activity) {
+
+    // Choose the correct shape and color.
+    const answerShape = shuffle(activity.shapes)[0];
+    const answerColor = shuffle(activity.colors)[0];
+
+    const correct = {
+        shape: answerShape,
+        color: answerColor,
+        value: answerColor + "-" + answerShape
+    };
+
+    // Same shape, different color.
+    const otherColor = shuffle(
+        activity.colors.filter(c => c !== answerColor)
+    )[0];
+
+    const distractor1 = {
+        shape: answerShape,
+        color: otherColor,
+        value: otherColor + "-" + answerShape
+    };
+
+    // Same color, different shape.
+    const otherShape = shuffle(
+        activity.shapes.filter(s => s !== answerShape)
+    )[0];
+
+    const distractor2 = {
+        shape: otherShape,
+        color: answerColor,
+        value: answerColor + "-" + otherShape
+    };
+
+    // Choose a third distractor from all remaining combinations.
+    const usedValues = [
+        correct.value,
+        distractor1.value,
+        distractor2.value
+    ];
+
+    const remaining = [];
+
+    activity.shapes.forEach(shape => {
+        activity.colors.forEach(color => {
+            const value = color + "-" + shape;
+
+            if (!usedValues.includes(value)) {
+                remaining.push({
+                    shape: shape,
+                    color: color,
+                    value: value
+                });
+            }
+        });
+    });
+
+    const distractor3 = shuffle(remaining)[0];
+
+    const prompt = activity.prompt
+        .replace("{color}", answerColor)
+        .replace("{shape}", answerShape);
+
+    return {
+        prompt: prompt,
+        answer: correct.value,
+        choices: shuffle([
+            correct,
+            distractor1,
+            distractor2,
+            distractor3
+        ])
+    };
+}
