@@ -6,6 +6,12 @@
       "type": "findShape",
       "prompt": "Find the {shape}!",
       "shapes": ["circle", "square", "triangle", "diamond"]
+    },
+    {
+      "type": "findColor",
+      "prompt": "Find the {color} square!",
+      "shape": "square",
+      "colors": ["red", "blue", "yellow", "green"]
     }
   ]
 }
