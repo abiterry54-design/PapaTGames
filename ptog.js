@@ -76,9 +76,13 @@ document.getElementById("heading").textContent =
 startButton.addEventListener("click", startGame);
 playAgainButton.addEventListener("click", startGame);
 
+
 async function initializeGame() {
+
+    const startLabel = document.getElementById("startLabel");
+
     startButton.disabled = true;
-    startButton.textContent = "LOADING...";
+    startLabel.textContent = "LOADING...";
 
     try {
         await Promise.all([
@@ -87,14 +91,17 @@ async function initializeGame() {
         ]);
 
         startButton.disabled = false;
-        startButton.textContent = "LET'S PLAY!";
+        startLabel.textContent = "SHAPES & COLORS";
 
         console.log("PTOG is ready!");
+
     } catch (error) {
+
         console.error("PTOG startup error:", error);
-        startButton.textContent = "PLEASE RELOAD";
+        startLabel.textContent = "PLEASE RELOAD";
     }
 }
+
 
 initializeGame();
 

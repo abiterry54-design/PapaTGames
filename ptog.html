@@ -15,9 +15,37 @@
 
         <h1 id="heading">Hi Orion! 👋</h1>
 
-        <div id="welcomeScreen">
-            <button id="startButton">LET'S PLAY!</button>
+
+    <div id="welcomeScreen">
+
+        <h2>What shall we play today?</h2>
+
+        <div class="activityMenu">
+
+            <button id="startButton"
+                    class="activityButton shapesButton"
+                    type="button">
+                <span class="menuPicture">
+                    🔴 🔷 🟨
+                </span>
+            <span id="startLabel">SHAPES &amp; COLORS</span>
+            </button>
+
+            <button id="numbersButton"
+                    class="activityButton numbersButton"
+                    type="button"
+                    disabled>
+                <span class="menuPicture">
+                    1 2 3 · A B C
+                </span>
+                <span>NUMBERS &amp; LETTERS</span>
+                <small>COMING SOON!</small>
+            </button>
+
         </div>
+
+    </div>
+
 
         <div id="gameScreen" hidden>
             <h2 id="question"></h2>
