@@ -7,66 +7,57 @@
           content="width=device-width, initial-scale=1.0">
 
     <title>Papa T's Games</title>
-    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="home.css?v=4">
 </head>
 
 <body>
     <main class="home">
-        <h1>Hi Kids! 👋</h1>
-        <h2>Welcome to Papa T's Games!</h2>
 
-        <p>Who's playing today?</p>
+        <header class="welcome">
+            <h1>🎮 Papa T's Games</h1>
+            <p>Hi Kids! Choose your game!</p>
+        </header>
 
-        <div class="studentButtons">
-            <button onclick="selectStudent('Laken', this)">
-                Laken
-            </button>
+        <section class="gameCard lakenCard">
+            <h2>Laken</h2>
+            <p class="grade">Kindergarten–1st Grade</p>
 
-            <button onclick="selectStudent('Orion', this)">
-                Orion
-            </button>
-        </div>
+            <div class="gamePicture lakenPicture">
+                <div class="learningTile">ABC</div>
+                <div class="learningTile">7 + 5</div>
+            </div>
 
-        <h2 id="greeting">Choose your name!</h2>
+            <h3>Words &amp; Math</h3>
 
-        <div class="gameButtons">
-            <button id="wordsButton"
-                    onclick="startGame('ptlg.html')"
-                    disabled>
-                📚 Words & Math
-            </button>
+            <a class="playButton lakenButton"
+               href="ptlg.html?student=Laken">
+                PLAY
+            </a>
+        </section>
 
-            <button id="orionButton"
-                    onclick="startGame('ptog.html')"
-                🔴 Shapes & Colors
-                <small>Let's Play!</small>
-            </button>
-        </div>
+        <section class="gameCard orionCard">
+            <h2>Orion</h2>
+            <p class="grade">Preschool</p>
+
+            <div class="gamePicture orionPicture">
+                <div class="shapePictures">
+                    <div class="circle"></div>
+                    <div class="square"></div>
+                    <div class="triangle"></div>
+                    <div class="diamond"></div>
+                </div>
+            </div>
+
+            <h3>Shapes &amp; Colors</h3>
+
+            <a class="playButton orionButton"
+               href="ptog.html?student=Orion">
+                PLAY
+            </a>
+        </section>
+
+        <footer>Made with ❤️ by Papa T</footer>
+
     </main>
-
-    <script>
-        let studentName = "";
-
-        function selectStudent(name, button) {
-            studentName = name;
-
-            document.getElementById("greeting").textContent =
-                "Hi " + name + "! What shall we play?";
-
-            document.querySelectorAll(".studentButtons button")
-                .forEach(b => b.classList.remove("selected"));
-
-            button.classList.add("selected");
-
-            document.getElementById("wordsButton").disabled = false;
-        }
-
-        function startGame(page) {
-            if (!studentName) return;
-
-            window.location.href =
-                page + "?student=" + encodeURIComponent(studentName);
-        }
-    </script>
 </body>
 </html>
