@@ -1,0 +1,34 @@
+
+{
+    "mathGames": [
+        {
+            "id": "addSubtract",
+            "label": "Add & Subtract",
+            "operators": ["+", "-"],
+            "min": 0,
+            "max": 100
+        },
+        {
+            "id": "easyMultiply",
+            "label": "Easy Multiplication",
+            "operators": ["×"],
+            "min": 0,
+            "max": 5
+        },
+        {
+            "id": "multiply",
+            "label": "Multiplication 0–10",
+            "operators": ["×"],
+            "min": 0,
+            "max": 10
+        },
+        {
+            "id": "sevens",
+            "label": "Practice the 7s",
+            "operators": ["×"],
+            "min": 0,
+            "max": 10,
+            "firstNumber": 7
+        }
+    ]
+}

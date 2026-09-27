@@ -3,13 +3,13 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Terry's Learning Game</title>
-    <link rel="stylesheet" href="style.css?v=4">
+    <link rel="stylesheet" href="style.css?v=5">
 </head>
 
 <body>
 
     <h1>Papa T's Learning Game!</h1>
-    <p class="version">2.1</p>
+    <p class="version">5</p>
 
     <div id="welcomeScreen" class="welcomeScreen">
 
@@ -27,9 +27,39 @@
             📚 Words
         </button>
 
-        <button class="gameButton" onclick="beginGame('mathFacts')">
+        <button class="gameButton"
+                id="chooseMathButton"
+                onclick="showMathMenu()">
             🔢 Math
         </button>
+
+        <div id="mathMenu" hidden>
+
+            <h3>Choose your math game!</h3>
+
+    <div class="mathChoices">
+            <button class="gameButton"
+                    onclick="beginMathGame('addSubtract')">
+                ➕ ➖ Add &amp; Subtract
+            </button>
+
+            <button class="gameButton"
+                    onclick="beginMathGame('easyMultiply')">
+                ✖️ Easy Multiplication (0–5)
+            </button>
+
+            <button class="gameButton"
+                    onclick="beginMathGame('multiply')">
+                ✖️ Multiplication (0–10)
+            </button>
+
+            <button class="gameButton"
+                    onclick="beginMathGame('sevens')">
+                ✖️ Practice the 7s
+            </button>
+
+            </div>
+        </div>
 
     </div>
 

@@ -16,6 +16,10 @@
     let mathMin = 0;
     let mathMax = 100;
     let allowNegatives = false;
+    let mathGames = [];
+    let selectedMathGame = null;
+    let selectedMathGameId = "addSubtract";
+
 
     // temp praiseMessages
     const praiseMessages = [
@@ -701,6 +705,7 @@ function getMathSpokenPrompt(card) {
     return card.prompt
         .replace("+", " plus ")
         .replace("-", " minus ")
+        .replace("×", " times ")
         .replace("=", " equals ");
 }
 
@@ -709,7 +714,19 @@ async function startGame() {
     currentCard = 0;
 
     if (gameType === "mathFacts") {
+
+        await loadMathGames();
+
+        selectedMathGame = mathGames.find(
+            game => game.id === selectedMathGameId
+        );
+
+    if (!selectedMathGame) {
+        throw new Error("Unknown math game: " + selectedMathGameId);
+    }
+
         cards = generateMathFacts();
+
     } else {
         await loadCards();
     }
@@ -723,18 +740,38 @@ async function startGame() {
     setGameState("readSpeak");
 }
 
-//showText("Because");
-//showPicture("images/papat7.png");
-//startGame();
+function beginMathGame(mathGameId) {
+    selectedMathGameId = mathGameId;
+    beginGame("mathFacts");
+}
+
+function showMathMenu() {
+    document.getElementById("chooseMathButton").hidden = true;
+    document.getElementById("mathMenu").hidden = false;
+}
+
+async function loadMathGames() {
+    const response = await fetch("mathGames.json?v=1");
+
+    if (!response.ok) {
+        throw new Error("Could not load mathGames.json");
+    }
+
+    const data = await response.json();
+    mathGames = data.mathGames;
+}
 
 function generateMathFacts() {
     let mathCards = [];
+    const mathOperators = selectedMathGame.operators;
+    const mathMin = selectedMathGame.min;
+    const mathMax = selectedMathGame.max;
 
     for (let i = 0; i < roundSize; i++) {
         let operator =
             mathOperators[Math.floor(Math.random() * mathOperators.length)];
 
-        let num1 =
+        let num1 = selectedMathGame.firstNumber ??
             Math.floor(Math.random() * (mathMax - mathMin + 1)) + mathMin;
 
         let num2 =
@@ -750,8 +787,10 @@ function generateMathFacts() {
 
         if (operator === "+") {
             answer = num1 + num2;
-        } else {
+        } else if (operator === "-") {
             answer = num1 - num2;
+        } else if (operator === "×") {
+            answer = num1 * num2;
         }
 
         mathCards.push({
