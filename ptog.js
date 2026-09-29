@@ -223,6 +223,10 @@ function nextCard() {
         const shape = document.createElement("div");
         shape.className = "shape " + choice.shape;
 
+        if (choice.label !== undefined) {
+            shape.textContent = choice.label;
+}
+
 //console.log("Rendering choice:", choice);
 
         // Look up the actual CSS color.
@@ -353,11 +357,57 @@ function generateCard(activity) {
         case "findColoredShape":
             return generateColoredShapeCard(activity);
 
+        case "findNumber":
+            return generateNumberCard(activity);    
+
         default:
             throw new Error(
                 "Unknown activity type: " + activity.type
             );
     }
+}
+
+function generateNumberCard(activity) {
+
+    // Build the available number pool.
+    const numbers = [];
+
+    for (let number = activity.min; number <= activity.max; number++) {
+        numbers.push(number);
+    }
+
+    // Pick the correct answer.
+    const answer = shuffle(numbers)[0];
+
+    // Pick the other three choices.
+    const otherNumbers = shuffle(
+        numbers.filter(number => number !== answer)
+    ).slice(0, activity.choiceCount - 1);
+
+    // Put the answer and distractors together and shuffle them.
+    const numberChoices = shuffle([
+        answer,
+        ...otherNumbers
+    ]);
+
+    // Create choices in our standard card format.
+    const cardChoices = numberChoices.map(number => ({
+        shape: "square",
+        color: shuffle(["red", "blue", "yellow", "green"])[0],
+        value: number,
+        label: number
+    }));
+
+    const prompt = activity.prompt.replace(
+        "{number}",
+        answer
+    );
+
+    return {
+        prompt: prompt,
+        answer: answer,
+        choices: cardChoices
+    };
 }
 
 function generateColoredShapeCard(activity) {

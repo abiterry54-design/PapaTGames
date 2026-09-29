@@ -17,6 +17,13 @@
       "prompt": "Find the {color} {shape}!",
       "shapes": ["circle", "square", "triangle", "diamond"],
       "colors": ["red", "blue", "yellow", "green"]
+    },
+    {
+      "type": "findNumber",
+      "prompt": "Find number {number}!",
+      "min": 0,
+      "max": 5,
+      "choiceCount": 4
     }
   ]
 }
