@@ -54,6 +54,8 @@ h2 {
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    color: black;
+    -webkit-text-fill-color: black;
 }
 
 .choiceButton:disabled {
