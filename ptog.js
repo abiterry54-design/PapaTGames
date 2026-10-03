@@ -22,7 +22,9 @@ const feedback = document.getElementById("feedback");
 const roundCompleteScreen = document.getElementById("roundCompleteScreen");
 const roundMessage = document.getElementById("roundMessage");
 const playAgainButton = document.getElementById("playAgainButton");
+const activityMenu = document.getElementById("activityMenu");
 
+let selectedActivities = [];
 let activityDeck = [];
 let activities = [];
 const colorValues = {
@@ -74,15 +76,25 @@ document.getElementById("heading").textContent =
     "Hi " + studentName + "! 👋";
 
 startButton.addEventListener("click", startGame);
-playAgainButton.addEventListener("click", startGame);
+playAgainButton.addEventListener("click", showActivityMenu);
+
+initializeGame();
+
+
+function showActivityMenu() {
+
+    roundCompleteScreen.hidden = true;
+    gameScreen.hidden = true;
+    welcomeScreen.hidden = false;
+}
 
 
 async function initializeGame() {
 
-    const startLabel = document.getElementById("startLabel");
+    //const startLabel = document.getElementById("startLabel");
 
     startButton.disabled = true;
-    startLabel.textContent = "LOADING...";
+    startButton.textContent = "LOADING...";
 
     try {
         await Promise.all([
@@ -90,20 +102,61 @@ async function initializeGame() {
             loadMessages()
         ]);
 
-        startButton.disabled = false;
-        startLabel.textContent = "SHAPES & COLORS";
+        buildActivityMenu();
+
+        startButton.disabled = true;
+        startButton.textContent = "LET'S PLAY!";
 
         console.log("PTOG is ready!");
 
     } catch (error) {
 
         console.error("PTOG startup error:", error);
-        startLabel.textContent = "PLEASE RELOAD";
+        startButton.textContent = "PLEASE RELOAD";
     }
 }
 
+function buildActivityMenu() {
 
-initializeGame();
+    activityMenu.innerHTML = "";
+
+    activities.forEach(activity => {
+
+        const button = document.createElement("button");
+
+        button.className = "activityButton";
+        button.type = "button";
+        button.textContent = activity.label;
+
+        button.addEventListener("click", () => {
+
+            const isSelected =
+                button.classList.toggle("selected");
+
+            if (isSelected) {
+
+                selectedActivities.push(activity);
+
+            } else {
+
+                selectedActivities =
+                    selectedActivities.filter(
+                        selected => selected !== activity
+                    );
+            }
+
+            startButton.disabled = selectedActivities.length === 0;
+
+            console.log(
+                "Selected activities:",
+                selectedActivities
+            );
+        });
+
+        activityMenu.appendChild(button);
+    });
+}
+
 
 function speakText(text, onFinished) {
     speechSynthesis.cancel();
@@ -176,16 +229,17 @@ function startGame() {
     lastShape = null;
     lastColor = null;
 
-    // Build a balanced deck of 15 activities.
+    // Build the deck from the selected activities.
     activityDeck = [];
 
-    activities.forEach(activity => {
-        for (let i = 0; i < 5; i++) {
-            activityDeck.push(activity);
-        }
-    });
+    for (let i = 0; i < cardsPerRound; i++) {
 
-    // Mix all three games together.
+        const activity =
+            selectedActivities[i % selectedActivities.length];
+
+        activityDeck.push(activity);
+    }
+
     activityDeck = shuffle(activityDeck);
 
     welcomeScreen.hidden = true;
@@ -358,7 +412,10 @@ function generateCard(activity) {
             return generateColoredShapeCard(activity);
 
         case "findNumber":
-            return generateNumberCard(activity);    
+            return generateNumberCard(activity); 
+            
+        case "findLetter":
+            return generateLetterCard(activity);
 
         default:
             throw new Error(
@@ -403,6 +460,48 @@ function generateNumberCard(activity) {
         answer
     );
 
+    return {
+        prompt: prompt,
+        answer: answer,
+        choices: cardChoices
+    };
+}
+
+function generateLetterCard(activity) {
+
+    // Get the pool of letters from JSON.
+    const letters = activity.letters;
+
+    // Pick the correct answer.
+    const answer = shuffle(letters)[0];
+
+    // Pick three other letters as wrong choices.
+    const otherLetters = shuffle(
+        letters.filter(letter => letter !== answer)
+    ).slice(0, activity.choiceCount - 1);
+
+    // Put the correct answer with the distractors
+    // and shuffle their positions.
+    const letterChoices = shuffle([
+        answer,
+        ...otherLetters
+    ]);
+
+    // Convert the letters into our standard PTOG choice objects.
+    const cardChoices = letterChoices.map(letter => ({
+        shape: "square",
+        color: shuffle(["red", "blue", "yellow", "green"])[0],
+        value: letter,
+        label: letter
+    }));
+
+    // Put the selected letter into the spoken/displayed prompt.
+    const prompt = activity.prompt.replace(
+        "{letter}",
+        answer
+    );
+
+    // Return our standard PTOG card.
     return {
         prompt: prompt,
         answer: answer,

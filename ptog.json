@@ -1,28 +1,40 @@
 {
   "cardsPerRound": 15,
+
   "activities": [
     {
       "type": "findShape",
+      "label": "Shapes",
       "prompt": "Find the {shape}!",
       "shapes": ["circle", "square", "triangle", "diamond"]
     },
     {
       "type": "findColor",
+      "label": "Colors",
       "prompt": "Find the {color} square!",
       "shape": "square",
       "colors": ["red", "blue", "yellow", "green"]
     },
     {
       "type": "findColoredShape",
+      "label": "Colored Shapes",
       "prompt": "Find the {color} {shape}!",
       "shapes": ["circle", "square", "triangle", "diamond"],
       "colors": ["red", "blue", "yellow", "green"]
     },
     {
       "type": "findNumber",
+      "label": "Numbers",
       "prompt": "Find number {number}!",
       "min": 0,
       "max": 5,
+      "choiceCount": 4
+    },
+    {
+      "type": "findLetter",
+      "label": "Letters",
+      "prompt": "Find the letter {letter}!",
+      "letters": ["A", "B", "C", "D", "E", "F"],
       "choiceCount": 4
     }
   ]
