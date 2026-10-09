@@ -33,6 +33,12 @@ dumpsters.forEach(dumpster => {
 
         if (answer === "7") {
 
+            // Remember the dumpster's original parking space
+            dumpster.originalParent = dumpster.parentElement;
+            dumpster.originalNextSibling = dumpster.nextElementSibling;
+
+            console.log("Original parent:", dumpster.originalParent);
+
             //Hide the wrong dumpsters
             dumpsters.forEach(otherDumpster => {
                 if (otherDumpster !== dumpster) {
@@ -217,6 +223,60 @@ number.addEventListener("animationend", () => {
         );
 
         console.log("Loader reached the bottom!");
+
+        // Return empty dumpster to its original container
+
+        console.log("Returning dumpster:", dumpster);
+        console.log("Parking parent:", dumpster.originalParent);
+
+        // FIRST: Remember where the dumpster is on screen
+        const startRect = dumpster.getBoundingClientRect();
+
+        // Return dumpster to its original flex position
+        dumpster.originalParent.insertBefore(
+            dumpster,
+            dumpster.originalNextSibling
+        );
+
+        // Clear its old forklift positioning
+        dumpster.style.position = "";
+        dumpster.style.left = "";
+        dumpster.style.top = "";
+        dumpster.style.transform = "";
+        dumpster.style.animation = "none";
+
+        // LAST: Find its new parking position
+        const endRect = dumpster.getBoundingClientRect();
+
+        // INVERT: Visually place it back where it started
+        const dx = startRect.left - endRect.left;
+        const dy = startRect.top - endRect.top;
+
+        dumpster.style.transition = "none";
+        dumpster.style.transform = `translate(${dx}px, ${dy}px)`;
+
+        // Force browser to recognize the starting position
+        void dumpster.offsetWidth;
+
+        function dumpsterParked(event) {
+            if (event.target !== dumpster ||
+                event.propertyName !== "transform") return;
+
+            dumpster.removeEventListener("transitionend", dumpsterParked);
+
+            console.log("Dumpster parked at curb!");
+
+            // Retract the empty forks
+            loaderArm.classList.remove("forksOut");
+        }
+
+        dumpster.addEventListener("transitionend", dumpsterParked);
+
+        // PLAY: Animate home
+        dumpster.style.transition = "transform 2s ease-in-out";
+        dumpster.style.transform = "translate(0, 0)";
+
+        console.log("Dumpster returning to curb!");
 
     }
 
