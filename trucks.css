@@ -1,0 +1,551 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+}
+
+#game {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+#message {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    z-index: 100;
+
+    background: white;
+    padding: 10px 30px;
+    border-radius: 20px;
+
+    font-size: 28px;
+    font-weight: bold;
+}
+
+#world {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+#sky {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 65%;
+
+    background: #63c5ff;
+}
+
+#neighborhood {
+    position: absolute;
+    bottom: 35%;
+    left: 0;
+    width: 200%;
+    height: 40%;
+    z-index: 5;
+}
+
+#curb {
+    position: absolute;
+    bottom: 30%;
+
+    width: 100%;
+    height: 5%;
+
+    background: #cccccc;
+}
+
+#road {
+    position: absolute;
+    bottom: 0;
+
+    width: 100%;
+    height: 30%;
+
+    background: #444444;
+
+}
+#roadLines {
+    position: absolute;
+
+    top: 50%;
+    left: 0;
+
+    width: 200%;
+    height: 8px;
+
+    display: flex;
+    justify-content: space-around;
+
+    transform: translateY(-50%);
+}
+.roadLine {
+    width: 8%;
+    height: 8px;
+
+    background: #f5d442;
+}
+
+#mountains {
+    position: absolute;
+    bottom: 35%;
+    left: 0;
+    width: 200%;
+    height: 35%;
+    z-index: 1;
+}
+
+.mountain {
+    position: absolute;
+    bottom: 0;
+
+    width: 0;
+    height: 0;
+
+    border-left: 180px solid transparent;
+    border-right: 180px solid transparent;
+    border-bottom: 220px solid #6f8f72;
+}
+
+    .mountain1 { left: 0%; }
+    .mountain2 { left: 12%; }
+    .mountain3 { left: 25%; }
+    .mountain4 { left: 38%; }
+    .mountain5 { left: 50%; }
+    .mountain6 { left: 62%; }
+    .mountain7 { left: 75%; }
+    .mountain8 { left: 88%; }
+
+    .mountain2,
+.mountain6 {
+    border-left-width: 230px;
+    border-right-width: 230px;
+    border-bottom-width: 170px;
+}
+
+.mountain3,
+.mountain7 {
+    border-left-width: 140px;
+    border-right-width: 140px;
+    border-bottom-width: 260px;
+}
+
+.mountain4,
+.mountain8 {
+    border-left-width: 260px;
+    border-right-width: 260px;
+    border-bottom-width: 190px;
+}
+
+#clouds {
+    position: absolute;
+    top: 15%;
+    left: 0;
+    width: 200%;
+    height: 25%;
+    z-index: 2;
+}
+
+.cloud {
+    position: absolute;
+    width: 120px;
+    height: 40px;
+    background: white;
+    border-radius: 40px;
+}
+
+.cloud::before,
+.cloud::after {
+    content: "";
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+}
+
+.cloud::before {
+    width: 55px;
+    height: 55px;
+    left: 20px;
+    top: -25px;
+}
+
+.cloud::after {
+    width: 70px;
+    height: 70px;
+    right: 15px;
+    top: -35px;
+}
+
+.cloud1 { left: 10%; }
+.cloud2 { left: 35%; }
+.cloud3 { left: 60%; }
+.cloud4 { left: 85%; }
+
+#truck {
+    position: absolute;
+
+    right: 5%;
+    bottom: 18%;
+
+    width: 35vw;
+
+    z-index: 20;
+}
+#truckBody {
+    width: 100%;
+    height: auto;
+
+    display: block;
+}
+.wheel {
+    position: absolute;
+    width: 15%;
+    height: auto;
+
+    bottom: 0;
+
+    z-index: 25;
+}
+
+.frontWheel {
+    left: 17%;
+}
+
+.rearWheel {
+    left: 64%;
+}
+
+#pickupPoint {
+    position: absolute;
+
+    left: -14%;
+    bottom: 33%;
+
+    width: 14px;
+    height: 14px;
+
+    background: red;
+    border-radius: 50%;
+
+    z-index: 50;
+}
+
+#loaderArm {
+    position: absolute;
+
+    right: 52%;
+    bottom: 15%;
+
+    width: 48%;
+    height: 12px;
+
+    background: #169b32;
+
+    transform-origin: right center;
+
+    z-index: 30;
+
+    transform: rotate(0deg);
+    transition: transform 3s ease-in-out;
+
+}
+
+#loaderArm.lifting {
+    transform: rotate(75deg);
+}
+
+
+#loaderForks {
+    position: absolute;
+    left: -50px;
+    top: 4px;
+
+    width: 50px;
+    height: 8px;
+
+    background: yellow;
+
+    transform: translateX(100%);
+    transition: transform 0.8s ease-out;
+}
+
+#loaderForks {
+    transform-origin: center center;
+}
+
+#loaderArm.forksOut #loaderForks {
+    transform: translateX(0);
+}
+
+#loaderArm.forksOut #loaderForks.dumping {
+    transform: translateX(0) rotate(30deg);
+}
+
+#world.driving #roadLines {
+    animation: roadMove 5s linear infinite;
+}
+
+#world.driving #mountains {
+    animation: mountainsMove 15s linear infinite;
+}
+
+#world.driving #clouds {
+    animation: cloudsMove 25s linear infinite;
+}
+
+#world.driving #neighborhood {
+    animation: neighborhoodMove 7s linear infinite;
+}
+
+#world.driving .wheel {
+    animation: wheelSpin 1s linear infinite;
+}
+
+#world.driving #dumpsters {
+    display: none;
+}
+
+
+.house {
+    position: absolute;
+    bottom: 0;
+    width: 180px;
+    height: 150px;
+}
+
+.redHouse {
+    left: 25%;
+}
+.blueHouse {
+    left: 8%;
+}
+
+.houseBody {
+    position: absolute;
+    bottom: 0;
+    left: 15px;
+    width: 150px;
+    height: 100px;
+    background: #d9534f;
+}
+
+.redHouse .houseBody {
+    background: #d9534f;
+}
+
+.blueHouse .houseBody {
+    background: #4f81bd;
+}
+
+.roof {
+    position: absolute;
+    bottom: 100px;
+    left: 0;
+
+    width: 0;
+    height: 0;
+
+    border-left: 90px solid transparent;
+    border-right: 90px solid transparent;
+    border-bottom: 65px solid #70452e;
+}
+.window {
+    position: absolute;
+    top: 20px;
+    width: 30px;
+    height: 30px;
+    background: #bfe8ff;
+    border: 3px solid white;
+}
+
+.windowLeft {
+    left: 20px;
+}
+
+.windowRight {
+    right: 20px;
+}
+
+.door {
+    position: absolute;
+    bottom: 0;
+    left: 60px;
+    width: 30px;
+    height: 55px;
+    background: #6b4226;
+}
+
+.tree {
+    position: absolute;
+    bottom: 0;
+    width: 80px;
+    height: 140px;
+}
+
+.tree1 {
+    left: 38%;
+}
+
+.tree2 {
+    left: 18%;
+    transform: scale(0.8);
+}
+
+.treeTrunk {
+    position: absolute;
+    bottom: 0;
+    left: 32px;
+    width: 16px;
+    height: 65px;
+    background: #795548;
+}
+
+.treeTop {
+    position: absolute;
+    top: 0;
+    left: 5px;
+    width: 70px;
+    height: 85px;
+    background: #3f9142;
+    border-radius: 50%;
+}
+
+#dumpsters {
+    position: absolute;
+    left: 12%;
+    bottom: 32%;
+    width: 30%;
+    display: flex;
+    gap: 18px;
+    z-index: 15;
+}
+
+.dumpster {
+    width: 90px;
+    height: 75px;
+    background: #356b3f;
+    border: 4px solid #24492b;
+    border-radius: 6px 6px 12px 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 42px;
+    font-weight: bold;
+    color: white;
+}
+.dumpster.selected {
+    animation: moveToTruck 2s forwards;
+}
+
+.dumpster.wrongChoice {
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+@keyframes moveToTruck {
+    from {
+        transform: translate(0, 0);
+    }
+
+    to {
+        transform: translate(
+            var(--move-x),
+            var(--move-y)
+        );
+    }
+}
+
+
+@keyframes wheelSpin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(-360deg);
+    }
+}
+
+@keyframes roadMove {
+    from {
+        transform: translate(-50%, -50%);
+    }
+
+    to {
+        transform: translate(0, -50%);
+    }
+}
+
+
+@keyframes mountainsMove {
+    from {
+        transform: translateX(-50%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes cloudsMove {
+    from {
+        transform: translateX(-50%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes neighborhoodMove {
+    from {
+        transform: translateX(-50%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+.dumpedNumber {
+    position: absolute;
+    font-size: 42px;
+    font-weight: bold;
+    color: white;
+    z-index: 40;
+    pointer-events: none;
+
+    animation: fallIntoTruck 1s ease-in forwards;
+}
+
+@keyframes fallIntoTruck {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+        opacity: 1;
+    }
+
+    40% {
+        transform: translate(25px, 35px) rotate(90deg);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(60px, 110px) rotate(270deg);
+        opacity: 0;
+    }
+}
