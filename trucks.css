@@ -31,6 +31,26 @@ body {
     font-weight: bold;
 }
 
+#startButton {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    z-index: 1000;
+
+    padding: 20px 40px;
+    font-size: 28px;
+    font-weight: bold;
+
+    background: #278447;
+    color: white;
+
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
 #world {
     width: 100%;
     height: 100%;
@@ -237,7 +257,7 @@ body {
     width: 14px;
     height: 14px;
 
-    background: red;
+    background: transparent;
     border-radius: 50%;
 
     z-index: 50;
@@ -276,7 +296,7 @@ body {
     width: 50px;
     height: 8px;
 
-    background: yellow;
+   background:  #169b32;
 
     transform: translateX(100%);
     transition: transform 0.8s ease-out;
@@ -294,20 +314,40 @@ body {
     transform: translateX(0) rotate(30deg);
 }
 
-#world.driving #roadLines {
+#roadLines {
     animation: roadMove 5s linear infinite;
+    animation-play-state: paused;
+}
+
+#world.driving #roadLines {
+    animation-play-state: running;
+}
+
+#mountains {
+    animation: mountainsMove 15s linear infinite;
+    animation-play-state: paused;
 }
 
 #world.driving #mountains {
-    animation: mountainsMove 15s linear infinite;
+    animation-play-state: running;
+}
+
+#clouds {
+    animation: cloudsMove 25s linear infinite;
+    animation-play-state: paused;
 }
 
 #world.driving #clouds {
-    animation: cloudsMove 25s linear infinite;
+    animation-play-state: running;
+}
+
+#neighborhood {
+    animation: neighborhoodMove 7s linear infinite;
+    animation-play-state: paused;
 }
 
 #world.driving #neighborhood {
-    animation: neighborhoodMove 7s linear infinite;
+    animation-play-state: running;
 }
 
 #world.driving .wheel {

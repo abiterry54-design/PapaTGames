@@ -1,0 +1,17 @@
+{
+  "activities": [
+    {
+      "type": "findNumber",
+      "prompt": "Find the number {number}",
+      "min": 0,
+      "max": 10,
+      "choiceCount": 3
+    },
+    {
+      "type": "findLetter",
+      "prompt": "Find the letter {letter}",
+      "letters": ["A", "B", "C", "D", "E", "F"],
+      "choiceCount": 3
+    }
+  ]
+}
