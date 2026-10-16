@@ -667,16 +667,30 @@ function endGame() {
     document.getElementById("endButtons").style.display = "flex";
 
     // Celebrate the completed word.
-    const finishedWord = cargo.join("");
+const finishedWord = cargo.join("");
 
-    const lettersSpoken = cargo.join(". ") + "...";
+function speakLetter(index) {
 
-    speakText(
-        lettersSpoken +
-        " " +
-        finishedWord +
-        "! You did it! Great job!"
-    );
+    // All letters have been spoken.
+    if (index >= cargo.length) {
+        setTimeout(() => {
+            speakText(
+                finishedWord + "! You did it! Great job!"
+            );
+        }, 800);
+        return;
+    }
+
+    // Speak one letter, then wait before the next.
+    speakText(cargo[index], () => {
+        setTimeout(() => {
+            speakLetter(index + 1);
+        }, 600);
+    });
+}
+
+    // Begin spelling.
+    speakLetter(0);
 
     console.log("GAME COMPLETE!");
     console.log("Final cargo:", cargo);
