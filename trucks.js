@@ -45,7 +45,7 @@ function stopDriving() {
 
 const message = document.getElementById("message");
 
-function speakText(text) {
+function speakText(text, onComplete) {
     window.speechSynthesis.cancel();
 
     const speech = new SpeechSynthesisUtterance(text);
@@ -54,24 +54,34 @@ function speakText(text) {
 
     const natasha = voices.find(
         voice => voice.name.includes("Microsoft Natasha Online")
-        //includes("Microsoft Natasha Online")
-        //includes("Microsoft Molly Online")
-        //includes("Microsoft Guy Online")
+    );
 
+    const tessa = voices.find(
+        voice => voice.name.toLowerCase().includes("tessa")
     );
 
     if (natasha) {
         speech.voice = natasha;
-    } else {
-        speech.lang = "en-US";
     }
+    else if (tessa) {
+        speech.voice = tessa;
+    }
+    else {
+        speech.lang = "en-US";
+}
 
     speech.rate = 0.95;
     speech.pitch = 1.0;
 
-    window.speechSynthesis.speak(speech);
-}
+    speech.onend = () => {if (onComplete) {onComplete();}
+    };
 
+    window.speechSynthesis.speak(speech);
+    
+        //includes("Microsoft Natasha Online")
+        //includes("Microsoft Molly Online")
+        //includes("Microsoft Guy Online")
+}
 
 function listVoices() {
     const voices = speechSynthesis.getVoices();
@@ -150,8 +160,7 @@ function driveToNextStop() {
 
         setTimeout(() => {driveToNextStop();}, 2500);
 
-        driveToNextStop();
-    });;
+    });
 
     document.getElementById("playAgainButton")
         .addEventListener("click", () => {
