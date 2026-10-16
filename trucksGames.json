@@ -12,6 +12,12 @@
       "prompt": "Find the letter {letter}",
       "letters": ["A", "B", "C", "D", "E", "F"],
       "choiceCount": 3
+    },
+    {
+      "type": "spellName",
+      "prompt": "Pick up the letter {letter}",
+      "word": "ORION",
+      "choiceCount": 3
     }
   ]
 }

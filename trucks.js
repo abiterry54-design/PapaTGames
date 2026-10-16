@@ -4,11 +4,12 @@ const loaderForks = document.getElementById("loaderForks");
 let gameState = "ready";
 const cargo = [];
 let completedStops = 0;
-const maxStops = 6;
+let maxStops = 6;
 let truckActivities = [];
 let currentChallenge = null;
 let lastCorrectAnswer = null;
 let lastCorrectPosition = -1;
+
 
 async function loadTruckGames() {
 
@@ -22,19 +23,70 @@ async function loadTruckGames() {
 
     truckActivities = config.activities;
 
+    const spellingActivity = truckActivities.find(
+    activity => activity.type === "spellName"
+);
+
+    maxStops = spellingActivity.word.length;
+
     console.log("Truck activities loaded:", truckActivities);
+
 }
 
 function startDriving() {
+    world.classList.remove("atStop");
     world.classList.add("driving");
 }
 
 function stopDriving() {
     world.classList.remove("driving");
+    world.classList.add("atStop");
 }
 
 const message = document.getElementById("message");
 
+function speakText(text) {
+    window.speechSynthesis.cancel();
+
+    const speech = new SpeechSynthesisUtterance(text);
+    speech.lang = "en-US";
+    const voices = speechSynthesis.getVoices();
+
+    const preferredVoice = voices.find(
+    voice => voice.name.includes("Microsoft Natasha Online")
+        //includes("Microsoft Natasha Online")
+        //includes("Microsoft Molly Online")
+        //includes("Microsoft Guy Online")
+
+);
+
+if (preferredVoice) {
+    speech.voice = preferredVoice;
+}
+
+    speech.rate = 0.85;
+    speech.pitch = 1;
+
+    window.speechSynthesis.speak(speech);
+}
+
+function listVoices() {
+    const voices = speechSynthesis.getVoices();
+
+    const englishVoices = voices.filter(
+        voice => voice.lang.startsWith("en-")
+    );
+
+    console.table(
+        englishVoices.map(voice => ({
+            name: voice.name,
+            language: voice.lang
+        }))
+    );
+}
+
+speechSynthesis.onvoiceschanged = listVoices;
+listVoices();
 
 function driveToNextStop() {
 
@@ -96,6 +148,15 @@ startButton.addEventListener("click", () => {
 
 });
 
+document.getElementById("playAgainButton")
+    .addEventListener("click", () => {
+        window.location.reload();
+    });
+
+document.getElementById("exitButton")
+    .addEventListener("click", () => {
+        window.location.href = "index.html";
+    });    
 
 const dumpsters = document.querySelectorAll(".dumpster");
 
@@ -451,10 +512,9 @@ function dumpNumber(dumpster, onComplete) {
 
 function generateTruckChallenge() {
 
-    // Randomly select a number or letter activity.
-    const activity = truckActivities[
-        Math.floor(Math.random() * truckActivities.length)
-    ];
+    const activity = truckActivities.find(
+        activity => activity.type === "spellName"
+    );
 
     let pool;
 
@@ -465,14 +525,15 @@ function generateTruckChallenge() {
         for (let n = activity.min; n <= activity.max; n++) {
             pool.push(String(n));
         }
+        } else if (activity.type === "findLetter") {
+            pool = [...activity.letters];
 
-    } else if (activity.type === "findLetter") {
+        } else if (activity.type === "spellName") {
+            pool = [..."ABCDEFGHIJKLMNOPQRSTUVWXYZ"];
 
-        pool = [...activity.letters];
-
-    } else {
-        throw new Error("Unknown truck activity: " + activity.type);
-    }
+        } else {
+            throw new Error("Unknown truck activity: " + activity.type);
+        }
 
     // Avoid repeating the previous correct answer.
     const available = pool.filter(
@@ -481,9 +542,9 @@ function generateTruckChallenge() {
 
     const answerPool = available.length ? available : pool;
 
-    const answer = answerPool[
-        Math.floor(Math.random() * answerPool.length)
-    ];
+    const answer = activity.type === "spellName"
+        ? activity.word[completedStops]
+        : answerPool[Math.floor(Math.random() * answerPool.length)];
 
     lastCorrectAnswer = answer;
 
@@ -554,6 +615,7 @@ function prepareNextStop() {
 
     // Display the new question.
     message.textContent = currentChallenge.prompt;
+    speakText(currentChallenge.prompt);
 
     console.log("New truck challenge:", currentChallenge);
 }
@@ -563,15 +625,76 @@ loadTruckGames().catch(error => {
 });
 
 function endGame() {
-
     gameState = "finished";
-
     stopDriving();
 
-    message.textContent =
-        "Great job, Orion! You collected: " +
-        cargo.join(", ");
+    message.textContent = "Great job! You spelled your name!";
+
+    const spelledWord = document.getElementById("spelledWord");
+
+    spelledWord.innerHTML = "";
+
+    cargo.forEach(letter => {
+        const letterBox = document.createElement("div");
+        letterBox.className = "spelledLetter";
+        letterBox.textContent = letter;
+        spelledWord.appendChild(letterBox);
+    });
+
+    spelledWord.style.display = "flex";
+    document.getElementById("endButtons").style.display = "flex";
 
     console.log("GAME COMPLETE!");
     console.log("Final cargo:", cargo);
 }
+
+function buildVoiceMenu() {
+    const select = document.getElementById("voiceSelect");
+
+    const voices = speechSynthesis.getVoices();
+
+    select.innerHTML = "";
+
+    voices
+        .filter(voice => voice.lang.startsWith("en-"))
+        .forEach(voice => {
+            const option = document.createElement("option");
+
+            option.value = voice.name;
+            option.textContent = voice.name;
+
+            select.appendChild(option);
+        });
+}
+
+document.getElementById("testVoiceButton")
+    .addEventListener("click", () => {
+
+        const selectedName =
+            document.getElementById("voiceSelect").value;
+
+        const voice = speechSynthesis.getVoices()
+            .find(v => v.name === selectedName);
+
+        speechSynthesis.cancel();
+
+        const speech = new SpeechSynthesisUtterance(
+            "Hey Orion! Let's pick up some trash!"
+        );
+
+        if (voice) {
+            speech.voice = voice;
+        }
+
+        speech.rate = 0.95;
+        speech.pitch = 1.1;
+
+        speechSynthesis.speak(speech);
+    });
+
+speechSynthesis.addEventListener(
+    "voiceschanged",
+    buildVoiceMenu
+);
+
+buildVoiceMenu();

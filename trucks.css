@@ -296,7 +296,13 @@ body {
     width: 50px;
     height: 8px;
 
-   background:  #169b32;
+    background: repeating-linear-gradient(
+        90deg,
+        #d9534f 0px,
+        #d9534f 8px,
+        silver 8px,
+        silver 20px
+    );
 
     transform: translateX(100%);
     transition: transform 0.8s ease-out;
@@ -354,7 +360,7 @@ body {
     animation: wheelSpin 1s linear infinite;
 }
 
-#world.driving #dumpsters {
+#world:not(.atStop) #dumpsters {
     display: none;
 }
 
@@ -588,4 +594,59 @@ body {
         transform: translate(60px, 110px) rotate(270deg);
         opacity: 0;
     }
+}
+
+#spelledWord {
+    display: none;
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 200;
+
+    gap: 12px;
+    justify-content: center;
+}
+
+.spelledLetter {
+    font-size: clamp(36px, 6vw, 80px);
+    font-weight: bold;
+    color: white;
+    background: #278447;
+    padding: 10px 18px;
+    border-radius: 12px;
+}
+
+#endButtons {
+    display: none;
+
+    position: absolute;
+    top: 33%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    z-index: 200;
+
+    gap: 20px;
+    justify-content: center;
+}
+
+#endButtons button {
+    padding: 12px 24px;
+    font-size: clamp(18px, 2.5vw, 26px);
+    font-weight: bold;
+
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+#playAgainButton {
+    background: #278447;
+    color: white;
+}
+
+#exitButton {
+    background: white;
+    color: #333;
 }
