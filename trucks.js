@@ -49,26 +49,29 @@ function speakText(text) {
     window.speechSynthesis.cancel();
 
     const speech = new SpeechSynthesisUtterance(text);
-    speech.lang = "en-US";
+
     const voices = speechSynthesis.getVoices();
 
-    const preferredVoice = voices.find(
-    voice => voice.name.includes("Microsoft Natasha Online")
+    const natasha = voices.find(
+        voice => voice.name.includes("Microsoft Natasha Online")
         //includes("Microsoft Natasha Online")
         //includes("Microsoft Molly Online")
         //includes("Microsoft Guy Online")
 
-);
+    );
 
-if (preferredVoice) {
-    speech.voice = preferredVoice;
-}
+    if (natasha) {
+        speech.voice = natasha;
+    } else {
+        speech.lang = "en-US";
+    }
 
-    speech.rate = 0.85;
-    speech.pitch = 1;
+    speech.rate = 0.95;
+    speech.pitch = 1.0;
 
     window.speechSynthesis.speak(speech);
 }
+
 
 function listVoices() {
     const voices = speechSynthesis.getVoices();
@@ -138,64 +141,56 @@ function driveToNextStop() {
 }
 
 
-const startButton = document.getElementById("startButton");
+    const startButton = document.getElementById("startButton");
 
-startButton.addEventListener("click", () => {
+    startButton.addEventListener("click", () => {
+        startButton.style.display = "none";
 
-    startButton.style.display = "none";
+        speakText("Let's go find some trash!");
 
-    driveToNextStop();
+        setTimeout(() => {driveToNextStop();}, 2500);
 
-});
+        driveToNextStop();
+    });;
 
-document.getElementById("playAgainButton")
-    .addEventListener("click", () => {
-        window.location.reload();
-    });
+    document.getElementById("playAgainButton")
+        .addEventListener("click", () => {
+            window.location.reload();
+        });
 
-document.getElementById("exitButton")
-    .addEventListener("click", () => {
-        window.location.href = "index.html";
-    });    
+    document.getElementById("exitButton")
+        .addEventListener("click", () => {
+            window.location.href = "index.html";
+        });    
 
-const dumpsters = document.querySelectorAll(".dumpster");
+    const dumpsters = document.querySelectorAll(".dumpster");
 
-dumpsters.forEach(dumpster => {
+    dumpsters.forEach(dumpster => {
 
-    dumpster.addEventListener("click", () => {
+        dumpster.addEventListener("click", () => {
 
-// Ignore clicks unless we're waiting for an answer
-if (gameState !== "choosing") {
-    return;
-}
+    // Ignore clicks unless we're waiting for an answer
+    if (gameState !== "choosing") {
+        return;
+    }
 
-const answer = dumpster.dataset.answer;
+    const answer = dumpster.dataset.answer;
 
-console.log("Orion picked:", answer);
+    console.log("Orion picked:", answer);
 
-if (answer === String(currentChallenge.answer)) {
+    if (answer === String(currentChallenge.answer)) {
 
-    gameState = "pickingUp";
+        gameState = "pickingUp";
 
-    pickupDumpster(dumpster, pickupComplete);
-}
+        pickupDumpster(dumpster, pickupComplete);
+    }
 
     }); // End click listener
 
 }); // End dumpsters.forEach
 
-
 function pickupComplete() {
-
     completedStops++;
-
-    console.log(
-        "Completed stops:",
-        completedStops,
-        "of",
-        maxStops
-    );
-
     gameState = "ready";
 
     if (completedStops >= maxStops) {
@@ -203,11 +198,21 @@ function pickupComplete() {
         return;
     }
 
-    message.textContent = "Great job!";
+    const encouragement = [
+        "Nice job!",
+        "Way to go!",
+        "Great pickup!",
+        "You're doing great!"
+    ];
 
-    setTimeout(() => {
-        driveToNextStop();
-    }, 2000);
+    const praise = encouragement[
+        Math.floor(Math.random() * encouragement.length)
+    ];
+
+    message.textContent = praise;
+    speakText(praise);
+
+    setTimeout(() => driveToNextStop(), 2000);
 }
 
 
@@ -613,15 +618,23 @@ function prepareNextStop() {
         dumpster.style.animation = "";
     });
 
-    // Display the new question.
-    message.textContent = currentChallenge.prompt;
-    speakText(currentChallenge.prompt);
+     // Display the new question.
+        message.textContent = currentChallenge.prompt;
 
-    console.log("New truck challenge:", currentChallenge);
-}
+        if (completedStops === 0) {
+            speakText(currentChallenge.prompt);
+        }
+        else if (completedStops === maxStops - 1) {
+            speakText("Last one! " + currentChallenge.prompt);
+        }
+        else {
+            speakText("Now, " + currentChallenge.prompt.toLowerCase());
+        }
 
-loadTruckGames().catch(error => {
-    console.error("Truck game configuration error:", error);
+        }
+
+        loadTruckGames().catch(error => {
+            console.error("Truck game configuration error:", error);
 });
 
 function endGame() {
@@ -643,6 +656,18 @@ function endGame() {
 
     spelledWord.style.display = "flex";
     document.getElementById("endButtons").style.display = "flex";
+
+    // Celebrate the completed word.
+    const finishedWord = cargo.join("");
+
+    const lettersSpoken = cargo.join(". ") + "...";
+
+    speakText(
+        lettersSpoken +
+        " " +
+        finishedWord +
+        "! You did it! Great job!"
+    );
 
     console.log("GAME COMPLETE!");
     console.log("Final cargo:", cargo);
