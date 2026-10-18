@@ -650,6 +650,8 @@ function endGame() {
     gameState = "finished";
     stopDriving();
 
+    document.getElementById("world").classList.add("gameComplete");
+    
     message.textContent = "Great job! You spelled your name!";
 
     const spelledWord = document.getElementById("spelledWord");
@@ -667,7 +669,7 @@ function endGame() {
     document.getElementById("endButtons").style.display = "flex";
 
     // Celebrate the completed word.
-const finishedWord = cargo.join("");
+    const finishedWord = cargo.join("");
 
 function speakLetter(index) {
 

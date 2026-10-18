@@ -650,3 +650,14 @@ body {
     background: white;
     color: #333;
 }
+/* Smaller end-game message on iPhone-sized screens */
+@media (max-width: 900px) and (orientation: landscape) {
+
+    #world.gameComplete #message {
+        font-size: clamp(14px, 2.5vw, 22px);
+        white-space: nowrap;
+        padding: 8px 15px;
+        max-width: 95vw;
+    }
+
+}
