@@ -651,7 +651,7 @@ function endGame() {
     stopDriving();
 
     document.getElementById("world").classList.add("gameComplete");
-    
+
     message.textContent = "Great job! You spelled your name!";
 
     const spelledWord = document.getElementById("spelledWord");
@@ -677,14 +677,14 @@ function speakLetter(index) {
     if (index >= cargo.length) {
         setTimeout(() => {
             speakText(
-                finishedWord + "! You did it! Great job!"
+                finishedWord.toLowerCase() + "! You did it! Great job!"
             );
         }, 800);
         return;
     }
 
     // Speak one letter, then wait before the next.
-    speakText(cargo[index], () => {
+speakText(cargo[index].toLowerCase(), () => {
         setTimeout(() => {
             speakLetter(index + 1);
         }, 600);
