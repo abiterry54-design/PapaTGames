@@ -2,7 +2,7 @@
 /* Laken's Personal Wordle — Version 0.1 */
 
 // Temporary settings until we connect wordle.json
-const answer = "COOKIE";
+const answer = "BIG";
 const maxGuesses = 6;
 let currentGuess = "";
 let currentRow = 0;
