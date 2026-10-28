@@ -2,8 +2,8 @@
 /* Laken's Personal Wordle — Version 0.1 */
 
 // Temporary settings until we connect wordle.json
-const answer = "BIG";
-const maxGuesses = 6;
+let answer = "";
+let maxGuesses = 6;
 let currentGuess = "";
 let currentRow = 0;
 let gameOver = false;
@@ -17,6 +17,65 @@ const colorPriority = {
     yellow: 2,
     green: 3
 };
+
+async function loadDailyPuzzle() {
+    try {
+        const response = await fetch("dailyWords.json");
+
+        if (!response.ok) {
+            throw new Error("Could not load dailyWords.json");
+        }
+
+        const data = await response.json();
+
+        // Get today's date using the iPhone's local date
+       
+        const today = new Date();
+        //const today = new Date(2026, 9, 28);
+
+        const dateKey =
+            today.getFullYear() + "-" +
+            String(today.getMonth() + 1).padStart(2, "0") + "-" +
+            String(today.getDate()).padStart(2, "0");
+
+        // Find today's puzzle
+        const puzzle = data.puzzles.find(
+            item => item.date === dateKey
+        );
+
+        if (!puzzle) {
+            document.getElementById("message").textContent =
+                "No Wordle puzzle scheduled for today!";
+            return;
+        }
+
+        answer = puzzle.word.toUpperCase();
+
+        // Individual puzzle setting takes priority;
+        // otherwise use the default for this word length.
+        maxGuesses = puzzle.maxGuesses ??
+            data.maxGuessesByLength[answer.length];
+
+        createGrid();
+        createKeyboard();
+
+        document.getElementById("guessCounter").textContent =
+            `Guess 1 of ${maxGuesses}`;
+
+        console.log("Loaded puzzle for", dateKey);
+        console.log("Word length:", answer.length);
+        console.log("Allowed guesses:", maxGuesses);
+
+    } catch (error) {
+        console.error("Wordle loading error:", error);
+
+        document.getElementById("message").textContent =
+            "Sorry, today's puzzle could not be loaded.";
+    }
+}
+
+
+
 
 // Build the puzzle grid
 function createGrid() {
@@ -88,7 +147,7 @@ keyboard.addEventListener("click", event => {
 });
 
 function handleKey(key) {
-    if (gameOver) return;
+    if (gameOver || !answer) return;
 
     if (key === "BACKSPACE") {
         currentGuess = currentGuess.slice(0, -1);
@@ -140,7 +199,7 @@ function submitGuess() {
         document.getElementById("guessCounter").textContent =
             `Solved in ${currentRow} of ${maxGuesses} guesses!`;
         document.getElementById("message").textContent =
-            `Great job, Laken! You solved LADLE in ${currentRow} guesses!`;
+            `Great job, Laken! You solved ${answer} in ${currentRow} guesses!`;
     }
     else if (currentRow >= maxGuesses) {
         gameOver = true;
@@ -210,8 +269,5 @@ function updateKeyboardColors(guess, result) {
 }
 
 // Initialize the game screen
-createGrid();
-createKeyboard();
-document.getElementById("guessCounter").textContent =
-    `Guess 1 of ${maxGuesses}`;
+loadDailyPuzzle();
 

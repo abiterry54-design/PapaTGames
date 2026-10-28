@@ -1,0 +1,551 @@
+{
+  "deck": "Laken Daily Wordle — 90 Days",
+  "maxGuessesByLength": {
+    "3": 4,
+    "4": 5,
+    "5": 6,
+    "6": 6
+  },
+  "puzzles": [
+    {
+      "date": "2026-10-28",
+      "word": "THAT",
+      "hint": "A word used to point to something.",
+      "praise": "Great thinking, Laken!"
+    },
+    {
+      "date": "2026-10-29",
+      "word": "AND",
+      "hint": "A word that joins two things.",
+      "praise": "You solved it!"
+    },
+    {
+      "date": "2026-10-30",
+      "word": "GHOST",
+      "hint": "A spooky visitor in Halloween stories.",
+      "praise": "Excellent word work!"
+    },
+    {
+      "date": "2026-10-31",
+      "word": "CANDY",
+      "hint": "A sweet treat often collected on Halloween.",
+      "praise": "Nice job, word detective!"
+    },
+    {
+      "date": "2026-11-01",
+      "word": "WITH",
+      "hint": "A word meaning together or alongside.",
+      "praise": "Way to go, Laken!"
+    },
+    {
+      "date": "2026-11-02",
+      "word": "YOU",
+      "hint": "The person I am talking to.",
+      "praise": "You kept trying!"
+    },
+    {
+      "date": "2026-11-03",
+      "word": "THERE",
+      "hint": "A word pointing to a place.",
+      "praise": "Great thinking, Laken!"
+    },
+    {
+      "date": "2026-11-04",
+      "word": "THEY",
+      "hint": "A word for a group of people.",
+      "praise": "You solved it!"
+    },
+    {
+      "date": "2026-11-05",
+      "word": "WAS",
+      "hint": "A word for something that happened before now.",
+      "praise": "Excellent word work!"
+    },
+    {
+      "date": "2026-11-06",
+      "word": "CALLED",
+      "hint": "The past tense of call.",
+      "praise": "Nice job, word detective!"
+    },
+    {
+      "date": "2026-11-07",
+      "word": "THIS",
+      "hint": "A word used to point to something nearby.",
+      "praise": "Way to go, Laken!"
+    },
+    {
+      "date": "2026-11-08",
+      "word": "WHICH",
+      "hint": "A question word for choosing between things.",
+      "praise": "You kept trying!"
+    },
+    {
+      "date": "2026-11-09",
+      "word": "FOR",
+      "hint": "A word that can tell who gets a gift.",
+      "praise": "Great thinking, Laken!"
+    },
+    {
+      "date": "2026-11-10",
+      "word": "HAVE",
+      "hint": "A word meaning to own something.",
+      "praise": "You solved it!"
+    },
+    {
+      "date": "2026-11-11",
+      "word": "PEOPLE",
+      "hint": "More than one person.",
+      "praise": "Excellent word work!"
+    },
+    {
+      "date": "2026-11-12",
+      "word": "THEIR",
+      "hint": "A word meaning belonging to them.",
+      "praise": "Nice job, word detective!"
+    },
+    {
+      "date": "2026-11-13",
+      "word": "ARE",
+      "hint": "A word in “We ___ ready.”",
+      "praise": "Way to go, Laken!"
+    },
+    {
+      "date": "2026-11-14",
+      "word": "FROM",
+      "hint": "A word telling where something started.",
+      "praise": "You kept trying!"
+    },
+    {
+      "date": "2026-11-15",
+      "word": "WHAT",
+      "hint": "A question word asking about a thing.",
+      "praise": "Great thinking, Laken!"
+    },
+    {
+      "date": "2026-11-16",
+      "word": "HIS",
+      "hint": "Belonging to a boy or man.",
+      "praise": "You solved it!"
+    },
+    {
+      "date": "2026-11-17",
+      "word": "OTHER",
+      "hint": "Different from the one mentioned.",
+      "praise": "Excellent word work!"
+    },
+    {
+      "date": "2026-11-18",
+      "word": "ANIMAL",
+      "hint": "A living creature such as a dog or lion.",
+      "praise": "Nice job, word detective!"
+    },
+    {
+      "date": "2026-11-19",
+      "word": "WERE",
+      "hint": "A past-tense word in “We ___ happy.”",
+      "praise": "Way to go, Laken!"
+    },
+    {
+      "date": "2026-11-20",
+      "word": "ONE",
+      "hint": "The number just before two.",
+      "praise": "You kept trying!"
+    },
+    {
+      "date": "2026-11-21",
+      "word": "ABOUT",
+      "hint": "A word meaning concerning something.",
+      "praise": "Great thinking, Laken!"
+    },
+    {
+      "date": "2026-11-22",
+      "word": "WHEN",
+      "hint": "A question word asking about time.",
+      "praise": "You solved it!"
+    },
+    {
+      "date": "2026-11-23",
+      "word": "HAD",
+      "hint": "A past-tense word for owning something.",
+      "praise": "Excellent word work!"
+    },
+    {
+      "date": "2026-11-24",
+      "word": "PLANET",
+      "hint": "Earth is one of these.",
+      "praise": "Nice job, word detective!"
+    },
+    {
+      "date": "2026-11-25",
+      "word": "YOUR",
+      "hint": "A word meaning belonging to you.",
+      "praise": "Way to go, Laken!"
+    },
+    {
+      "date": "2026-11-26",
+      "word": "FAMILY",
+      "hint": "People related to you.",
+      "praise": "You kept trying!"
+    },
+    {
+      "date": "2026-11-27",
+      "word": "BUT",
+      "hint": "A word that shows a difference.",
+      "praise": "Great thinking, Laken!"
+    },
+    {
+      "date": "2026-11-28",
+      "word": "SAID",
+      "hint": "A past-tense word for speaking.",
+      "praise": "You solved it!"
+    },
+    {
+      "date": "2026-11-29",
+      "word": "ROCKET",
+      "hint": "A vehicle that can fly into space.",
+      "praise": "Excellent word work!"
+    },
+    {
+      "date": "2026-11-30",
+      "word": "WOULD",
+      "hint": "A word in “I ___ like some water.”",
+      "praise": "Nice job, word detective!"
+    },
+    {
+      "date": "2026-12-01",
+      "word": "NOT",
+      "hint": "A word that makes a statement negative.",
+      "praise": "Way to go, Laken!"
+    },
+    {
+      "date": "2026-12-02",
+      "word": "EACH",
+      "hint": "Every one, considered separately.",
+      "praise": "You kept trying!"
+    },
+    {
+      "date": "2026-12-03",
+      "word": "WILL",
+      "hint": "A word often used to talk about the future.",
+      "praise": "Great thinking, Laken!"
+    },
+    {
+      "date": "2026-12-04",
+      "word": "ALL",
+      "hint": "Every single one.",
+      "praise": "You solved it!"
+    },
+    {
+      "date": "2026-12-05",
+      "word": "WRITE",
+      "hint": "To put letters or words on paper.",
+      "praise": "Excellent word work!"
+    },
+    {
+      "date": "2026-12-06",
+      "word": "LIKE",
+      "hint": "To enjoy something.",
+      "praise": "Nice job, word detective!"
+    },
+    {
+      "date": "2026-12-07",
+      "word": "MANY",
+      "hint": "A word meaning a large number.",
+      "praise": "Way to go, Laken!"
+    },
+    {
+      "date": "2026-12-08",
+      "word": "CAN",
+      "hint": "A word meaning you are able to do something.",
+      "praise": "You kept trying!"
+    },
+    {
+      "date": "2026-12-09",
+      "word": "APPLE",
+      "hint": "A crunchy fruit that can be red or green.",
+      "praise": "Great thinking, Laken!"
+    },
+    {
+      "date": "2026-12-10",
+      "word": "THEN",
+      "hint": "A word meaning next or at that time.",
+      "praise": "You solved it!"
+    },
+    {
+      "date": "2026-12-11",
+      "word": "SHE",
+      "hint": "A word used instead of a girl’s name.",
+      "praise": "Excellent word work!"
+    },
+    {
+      "date": "2026-12-12",
+      "word": "SPRING",
+      "hint": "The season after winter.",
+      "praise": "Nice job, word detective!"
+    },
+    {
+      "date": "2026-12-13",
+      "word": "THEM",
+      "hint": "A word for people or things already mentioned.",
+      "praise": "Way to go, Laken!"
+    },
+    {
+      "date": "2026-12-14",
+      "word": "WATER",
+      "hint": "A clear liquid we drink.",
+      "praise": "You kept trying!"
+    },
+    {
+      "date": "2026-12-15",
+      "word": "HOW",
+      "hint": "A question word about the way something happens.",
+      "praise": "Great thinking, Laken!"
+    },
+    {
+      "date": "2026-12-16",
+      "word": "SOME",
+      "hint": "A few, but not necessarily all.",
+      "praise": "You solved it!"
+    },
+    {
+      "date": "2026-12-17",
+      "word": "SUMMER",
+      "hint": "The warm season after spring.",
+      "praise": "Excellent word work!"
+    },
+    {
+      "date": "2026-12-18",
+      "word": "COULD",
+      "hint": "A word meaning was able to.",
+      "praise": "Nice job, word detective!"
+    },
+    {
+      "date": "2026-12-19",
+      "word": "HER",
+      "hint": "Belonging to a girl or woman.",
+      "praise": "Way to go, Laken!"
+    },
+    {
+      "date": "2026-12-20",
+      "word": "MAKE",
+      "hint": "To create or build something.",
+      "praise": "You kept trying!"
+    },
+    {
+      "date": "2026-12-21",
+      "word": "WINTER",
+      "hint": "The coldest season of the year.",
+      "praise": "Great thinking, Laken!"
+    },
+    {
+      "date": "2026-12-22",
+      "word": "HIM",
+      "hint": "A word used instead of a boy’s name.",
+      "praise": "You solved it!"
+    },
+    {
+      "date": "2026-12-23",
+      "word": "WORDS",
+      "hint": "These are made of letters.",
+      "praise": "Excellent word work!"
+    },
+    {
+      "date": "2026-12-24",
+      "word": "SCHOOL",
+      "hint": "A place where children learn.",
+      "praise": "Nice job, word detective!"
+    },
+    {
+      "date": "2026-12-25",
+      "word": "FRIEND",
+      "hint": "Someone you like to spend time with.",
+      "praise": "Way to go, Laken!"
+    },
+    {
+      "date": "2026-12-26",
+      "word": "HAS",
+      "hint": "A word meaning owns or holds.",
+      "praise": "You kept trying!"
+    },
+    {
+      "date": "2026-12-27",
+      "word": "NUMBER",
+      "hint": "A symbol or word used for counting.",
+      "praise": "Great thinking, Laken!"
+    },
+    {
+      "date": "2026-12-28",
+      "word": "TIME",
+      "hint": "What clocks measure.",
+      "praise": "You solved it!"
+    },
+    {
+      "date": "2026-12-29",
+      "word": "TWO",
+      "hint": "The number after one.",
+      "praise": "Excellent word work!"
+    },
+    {
+      "date": "2026-12-30",
+      "word": "INTO",
+      "hint": "A word for going inside something.",
+      "praise": "Nice job, word detective!"
+    },
+    {
+      "date": "2026-12-31",
+      "word": "LOOK",
+      "hint": "To turn your eyes toward something.",
+      "praise": "Way to go, Laken!"
+    },
+    {
+      "date": "2027-01-01",
+      "word": "FIRST",
+      "hint": "Before all the others.",
+      "praise": "You kept trying!"
+    },
+    {
+      "date": "2027-01-02",
+      "word": "SEE",
+      "hint": "What your eyes help you do.",
+      "praise": "Great thinking, Laken!"
+    },
+    {
+      "date": "2027-01-03",
+      "word": "MORE",
+      "hint": "An amount greater than before.",
+      "praise": "You solved it!"
+    },
+    {
+      "date": "2027-01-04",
+      "word": "PUZZLE",
+      "hint": "A challenge you try to solve.",
+      "praise": "Excellent word work!"
+    },
+    {
+      "date": "2027-01-05",
+      "word": "TRAIN",
+      "hint": "A vehicle that travels on tracks.",
+      "praise": "Nice job, word detective!"
+    },
+    {
+      "date": "2027-01-06",
+      "word": "WAY",
+      "hint": "A path or method.",
+      "praise": "Way to go, Laken!"
+    },
+    {
+      "date": "2027-01-07",
+      "word": "THAN",
+      "hint": "A word used when comparing things.",
+      "praise": "You kept trying!"
+    },
+    {
+      "date": "2027-01-08",
+      "word": "BEEN",
+      "hint": "A word in “I have ___ there.”",
+      "praise": "Great thinking, Laken!"
+    },
+    {
+      "date": "2027-01-09",
+      "word": "WHO",
+      "hint": "A question word asking about a person.",
+      "praise": "You solved it!"
+    },
+    {
+      "date": "2027-01-10",
+      "word": "SMILE",
+      "hint": "A happy expression on your face.",
+      "praise": "Excellent word work!"
+    },
+    {
+      "date": "2027-01-11",
+      "word": "BRIGHT",
+      "hint": "Giving off lots of light.",
+      "praise": "Nice job, word detective!"
+    },
+    {
+      "date": "2027-01-12",
+      "word": "FIND",
+      "hint": "To discover where something is.",
+      "praise": "Way to go, Laken!"
+    },
+    {
+      "date": "2027-01-13",
+      "word": "NOW",
+      "hint": "At this very moment.",
+      "praise": "You kept trying!"
+    },
+    {
+      "date": "2027-01-14",
+      "word": "PLANT",
+      "hint": "A living thing that grows leaves or flowers.",
+      "praise": "Great thinking, Laken!"
+    },
+    {
+      "date": "2027-01-15",
+      "word": "LONG",
+      "hint": "The opposite of short.",
+      "praise": "You solved it!"
+    },
+    {
+      "date": "2027-01-16",
+      "word": "DAY",
+      "hint": "The time between one morning and the next.",
+      "praise": "Excellent word work!"
+    },
+    {
+      "date": "2027-01-17",
+      "word": "ORANGE",
+      "hint": "A color and a citrus fruit.",
+      "praise": "Nice job, word detective!"
+    },
+    {
+      "date": "2027-01-18",
+      "word": "DOWN",
+      "hint": "The opposite of up.",
+      "praise": "Way to go, Laken!"
+    },
+    {
+      "date": "2027-01-19",
+      "word": "LIGHT",
+      "hint": "It helps you see in the dark.",
+      "praise": "You kept trying!"
+    },
+    {
+      "date": "2027-01-20",
+      "word": "DID",
+      "hint": "A past-tense form of do.",
+      "praise": "Great thinking, Laken!"
+    },
+    {
+      "date": "2027-01-21",
+      "word": "COME",
+      "hint": "To move toward the speaker.",
+      "praise": "You solved it!"
+    },
+    {
+      "date": "2027-01-22",
+      "word": "THESE",
+      "hint": "A word pointing to several nearby things.",
+      "praise": "Excellent word work!"
+    },
+    {
+      "date": "2027-01-23",
+      "word": "HOUSE",
+      "hint": "A building where people live.",
+      "praise": "Nice job, word detective!"
+    },
+    {
+      "date": "2027-01-24",
+      "word": "GET",
+      "hint": "To receive or obtain something.",
+      "praise": "Way to go, Laken!"
+    },
+    {
+      "date": "2027-01-25",
+      "word": "MADE",
+      "hint": "The past tense of make.",
+      "praise": "You kept trying!"
+    }
+  ]
+}
