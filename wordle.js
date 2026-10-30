@@ -219,8 +219,7 @@ function submitGuess() {
             answer === "GHOST" ? "👻" : "🏆";
 
         document.getElementById("message").textContent =
-            `${rewardEmoji} Great job, Laken! You solved ${answer} in ${currentRow} guesses!
-        ${rewardEmoji}`;
+            `Great job, Laken! You solved ${answer} in ${currentRow} guesses!`;
     }
     else if (currentRow >= maxGuesses) {
         gameOver = true;
