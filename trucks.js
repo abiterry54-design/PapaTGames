@@ -24,10 +24,19 @@ async function loadTruckGames() {
     truckActivities = config.activities;
 
     const spellingActivity = truckActivities.find(
-    activity => activity.type === "spellName"
-);
+        activity => activity.type === "spellName"
+    );
+
+    // Choose one random word for this round.
+    const words = spellingActivity.words;
+
+    const randomIndex = Math.floor(Math.random() * words.length);
+
+    spellingActivity.word = words[randomIndex];
 
     maxStops = spellingActivity.word.length;
+
+    console.log("Today's truck word:", spellingActivity.word);
 
     console.log("Truck activities loaded:", truckActivities);
 
@@ -652,7 +661,8 @@ function endGame() {
 
     document.getElementById("world").classList.add("gameComplete");
 
-    message.textContent = "Great job! You spelled your name!";
+    message.textContent =
+        "Great job! You spelled " + cargo.join("") + "!";
 
     const spelledWord = document.getElementById("spelledWord");
 
@@ -671,6 +681,7 @@ function endGame() {
     // Celebrate the completed word.
     const finishedWord = cargo.join("");
 
+
 function speakLetter(index) {
 
     // All letters have been spoken.
@@ -684,7 +695,7 @@ function speakLetter(index) {
     }
 
     // Speak one letter, then wait before the next.
-speakText(cargo[index].toLowerCase(), () => {
+    speakText(cargo[index].toLowerCase(), () => {
         setTimeout(() => {
             speakLetter(index + 1);
         }, 600);

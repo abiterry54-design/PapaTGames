@@ -13,11 +13,21 @@
       "letters": ["A", "B", "C", "D", "E", "F"],
       "choiceCount": 3
     },
-    {
-      "type": "spellName",
-      "prompt": "Pick up the letter {letter}",
-      "word": "ORION",
-      "choiceCount": 3
-    }
+{
+  "type": "spellName",
+  "prompt": "Pick up the letter {letter}",
+  "words": [
+    "ORION",
+    "MOMMY",
+    "DADDY",
+    "LAKEN",
+    "PAPAT",
+    "GRANDMA",
+    "GUS",
+    "COOKIE",
+    "JULIETTE"
+  ],
+  "choiceCount": 3
+}
   ]
 }
