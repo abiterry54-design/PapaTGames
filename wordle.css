@@ -29,6 +29,16 @@ h1 {
     margin-bottom: 20px;
 }
 
+#reward {
+    font-size: 60px;
+    text-align: center;
+    margin: 10px 0;
+}
+
+#reward:empty {
+    display: none;
+}
+
 /* Puzzle grid */
 
 #wordleGrid {

@@ -1,8 +1,8 @@
 {
   "deck": "Laken Daily Wordle — 90 Days",
   "maxGuessesByLength": {
-    "3": 4,
-    "4": 5,
+    "3": 6,
+    "4": 6,
     "5": 6,
     "6": 6
   },

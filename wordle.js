@@ -7,6 +7,8 @@ let maxGuesses = 6;
 let currentGuess = "";
 let currentRow = 0;
 let gameOver = false;
+let currentHint = "";
+let hintVisible = false;
 
 const wordleGrid = document.getElementById("wordleGrid");
 const keyboard = document.getElementById("keyboard");
@@ -50,6 +52,7 @@ async function loadDailyPuzzle() {
         }
 
         answer = puzzle.word.toUpperCase();
+        currentHint = puzzle.hint || "";
 
         // Individual puzzle setting takes priority;
         // otherwise use the default for this word length.
@@ -193,16 +196,36 @@ function submitGuess() {
     }
 
     currentRow++;
+    if (
+        currentRow >= 2 &&
+        currentGuess !== answer &&
+        currentRow < maxGuesses &&
+        currentHint
+    ) {
+        hintButton.hidden = false;
+    }
 
     if (currentGuess === answer) {
         gameOver = true;
+        hintButton.hidden = true;
+        hintText.hidden = true;
+
         document.getElementById("guessCounter").textContent =
             `Solved in ${currentRow} of ${maxGuesses} guesses!`;
+
+        const rewardEmoji = answer === "GHOST" ? "👻" : "🏆";
+
+        document.getElementById("reward").textContent =
+            answer === "GHOST" ? "👻" : "🏆";
+
         document.getElementById("message").textContent =
-            `Great job, Laken! You solved ${answer} in ${currentRow} guesses!`;
+            `${rewardEmoji} Great job, Laken! You solved ${answer} in ${currentRow} guesses!
+        ${rewardEmoji}`;
     }
     else if (currentRow >= maxGuesses) {
         gameOver = true;
+        hintButton.hidden = true;   
+        hintText.hidden = true;
         document.getElementById("guessCounter").textContent =
     `       Used all ${maxGuesses} guesses`;
         document.getElementById("message").textContent =
@@ -271,3 +294,15 @@ function updateKeyboardColors(guess, result) {
 // Initialize the game screen
 loadDailyPuzzle();
 
+const hintButton = document.getElementById("hintButton");
+const hintText = document.getElementById("hintText");
+
+hintButton.addEventListener("click", () => {
+    hintVisible = !hintVisible;
+
+    hintText.hidden = !hintVisible;
+    hintText.textContent = currentHint;
+
+    hintButton.textContent =
+        hintVisible ? "Hide Hint" : "💡 Hint";
+});

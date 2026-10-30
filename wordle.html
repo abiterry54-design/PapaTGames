@@ -6,7 +6,7 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>Laken's LADLE</title>
+    <title>Laken's Wordle</title>
 
     <link rel="stylesheet" href="wordle.css">
     <script src="wordle.js" defer></script>
@@ -14,18 +14,23 @@
 
 <body>
     <main id="game">
-        <h1>Laken's LADLE</h1>
+        <h1>Laken's Wordle</h1>
 
         <p id="message">
             Guess today's secret word!
         </p>
+
+        <div id="reward" style="font-size: 60px;"></div>
 
         <div id="wordleGrid"></div>
 
         <div id="keyboard"></div>
 
         <p id="guessCounter"></p>
-        
+
+        <button id="hintButton" hidden>💡 Hint</button>
+        <div id="hintText" hidden></div>
+
     </main>
 </body>
 </html>
