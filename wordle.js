@@ -197,7 +197,7 @@ function submitGuess() {
 
     currentRow++;
     if (
-        currentRow >= 2 &&
+        currentRow >= 3 &&
         currentGuess !== answer &&
         currentRow < maxGuesses &&
         currentHint
