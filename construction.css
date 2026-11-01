@@ -1,0 +1,59 @@
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+#viewport {
+    width: 100%;
+    height: 100dvh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+#world {
+    position: relative;
+    width: 100%;
+}
+
+.zone {
+    width: 100%;
+    height: 100dvh;
+    padding: 20px;
+}
+
+.zone h2 {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    font-size: 22px;
+    margin-top: 30px;
+}
+
+.quarry {
+    background-color: #c9b18c;
+}
+
+.yard {
+    background-color: #b5c99a;
+}
+
+.building {
+    background-color: #d6c8a8;
+}
+
+#excavator {
+    position: absolute;
+    width: 90px;
+    height: auto;
+
+    left: 100px;
+    top: 200px;
+
+    touch-action: none;
+    user-select: none;
+    -webkit-user-drag: none;
+}
