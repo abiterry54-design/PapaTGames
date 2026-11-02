@@ -1,0 +1,22 @@
+{
+    "equipment": [
+        {
+            "type": "excavator",
+            "image": "images/excavator.png",
+            "width": 90,
+            "count": 4
+        },
+        {
+            "type": "bulldozer",
+            "image": "images/bulldozer.png",
+            "width": 100,
+            "count": 4
+        },
+        {
+            "type": "dumpTruck",
+            "image": "images/dumptruck.png",
+            "width": 95,
+            "count": 4
+        }
+    ]
+}

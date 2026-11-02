@@ -18,41 +18,21 @@ html, body {
 #world {
     position: relative;
     width: 100%;
+    height: 300dvh;
 }
 
-.zone {
+.quarry-world {
     width: 100%;
-    height: 100dvh;
-    padding: 20px;
+    height: 100%;
+    background-image: url("images/quarry-world.png");
+    background-size: 100% 100%;
+    background-position: center top;
+    background-repeat: no-repeat;
 }
 
-.zone h2 {
-    text-align: center;
-    font-family: Arial, sans-serif;
-    font-size: 22px;
-    margin-top: 30px;
-}
-
-.quarry {
-    background-color: #c9b18c;
-}
-
-.yard {
-    background-color: #b5c99a;
-}
-
-.building {
-    background-color: #d6c8a8;
-}
-
-#excavator {
+.equipment {
     position: absolute;
-    width: 90px;
     height: auto;
-
-    left: 100px;
-    top: 200px;
-
     touch-action: none;
     user-select: none;
     -webkit-user-drag: none;
