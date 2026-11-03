@@ -6,9 +6,40 @@ console.log("World height:", world.offsetHeight);
 console.log("Viewport height:", viewport.clientHeight);
 
 class Equipment {
-    constructor(element, world) {
+    constructor(element, world, type) {
         this.element = element;
         this.world = world;
+        this.type = type;
+
+        const engineSounds = {
+            excavator: "bulldozer.mp3",
+            bulldozer: "bulldozer.mp3",
+            dumpTruck: "bulldozer.mp3"
+        };
+
+        this.engineSound = new Audio(engineSounds[this.type]);
+        this.engineSound.loop = true;
+        this.engineSound.volume = 0.35;
+
+        const engineSpeeds = {
+            excavator: 0.85,
+            bulldozer: 1.0,
+            dumpTruck: 1.15
+        };
+
+        this.engineSound.playbackRate = engineSpeeds[this.type];
+    }
+
+
+    startEngine() {
+        this.engineSound.play().catch(err => {
+            console.log("Engine sound:", err);
+        });
+    }
+
+    stopEngine() {
+        this.engineSound.pause();
+        this.engineSound.currentTime = 0;
     }
 
     moveTo(x, y) {
@@ -90,6 +121,8 @@ class WorldController {
         if (this.activeEquipment) return;
 
         this.activeEquipment = equipment;
+        equipment.startEngine();
+
         this.activePointerId = event.pointerId;
 
         const rect = equipment.element.getBoundingClientRect();
@@ -122,7 +155,8 @@ class WorldController {
     stopDrag(event) {
         if (!this.activeEquipment ||
             event.pointerId !== this.activePointerId) return;
-
+        
+        this.activeEquipment.stopEngine();
         this.activeEquipment = null;
         this.activePointerId = null;
 
@@ -181,52 +215,52 @@ async function loadEquipment() {
 
         const data = await response.json();
 
-for (const item of data.equipment) {
-        for (let i = 1; i <= item.count; i++) {
+        for (const item of data.equipment) {
+            for (let i = 1; i <= item.count; i++) {
 
-            const img = document.createElement("img");
+                const img = document.createElement("img");
 
-            img.id = `${item.type}${i}`;
-            img.className = "equipment";
-            img.src = item.image;
-            img.alt = item.type;
-            img.draggable = false;
-            img.style.width = item.width + "px";
+                img.id = `${item.type}${i}`;
+                img.className = "equipment";
+                img.src = item.image;
+                img.alt = item.type;
+                img.draggable = false;
+                img.style.width = item.width + "px";
 
-            world.appendChild(img);
+                world.appendChild(img);
 
-            const machine = new Equipment(img, world);
-            equipmentManager.add(machine);
+                const machine = new Equipment(img, world, item.type);
+                equipmentManager.add(machine);
 
-            // Wait until the image dimensions are available.
-            await img.decode();
+                // Wait until the image dimensions are available.
+                await img.decode();
 
-            // Random position anywhere in the world.
-            const maxX = Math.max(0, world.clientWidth - img.offsetWidth);
-            const maxY = Math.max(0, world.clientHeight - img.offsetHeight);
+                // Random position anywhere in the world.
+                const maxX = Math.max(0, world.clientWidth - img.offsetWidth);
+                const maxY = Math.max(0, world.clientHeight - img.offsetHeight);
 
-            const x = Math.random() * maxX;
-            const y = Math.random() * maxY;
+                const x = Math.random() * maxX;
+                const y = Math.random() * maxY;
 
-            machine.moveTo(x, y);
+                machine.moveTo(x, y);
 
-            img.addEventListener("pointerdown", event => {
-                controller.startDrag(machine, event);
-            });
+                img.addEventListener("pointerdown", event => {
+                    controller.startDrag(machine, event);
+                });
 
-            img.addEventListener("pointermove", event => {
-                controller.drag(event);
-            });
+                img.addEventListener("pointermove", event => {
+                    controller.drag(event);
+                });
 
-            img.addEventListener("pointerup", event => {
-                controller.stopDrag(event);
-            });
+                img.addEventListener("pointerup", event => {
+                    controller.stopDrag(event);
+                });
 
-            img.addEventListener("pointercancel", event => {
-                controller.stopDrag(event);
-            });
+                img.addEventListener("pointercancel", event => {
+                    controller.stopDrag(event);
+                });
         }
-}
+    }
 
         console.log("Equipment loaded:", equipmentManager.count());
 
