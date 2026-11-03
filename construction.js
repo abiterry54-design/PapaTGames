@@ -10,6 +10,7 @@ class Equipment {
         this.element = element;
         this.world = world;
         this.type = type;
+        this.facing = "left";
 
         const engineSounds = {
             excavator: "bulldozer.mp3",
@@ -40,6 +41,15 @@ class Equipment {
     stopEngine() {
         this.engineSound.pause();
         this.engineSound.currentTime = 0;
+    }
+
+    faceDirection(direction) {
+        if (direction === this.facing) return;
+
+        this.facing = direction;
+
+        this.element.style.transform =
+            direction === "right" ? "scaleX(-1)" : "scaleX(1)";
     }
 
     moveTo(x, y) {
@@ -127,6 +137,13 @@ class WorldController {
 
         const rect = equipment.element.getBoundingClientRect();
 
+        console.log(
+            equipment.element.id,
+            "parking:",
+            (equipment.x / world.clientWidth).toFixed(3),
+            (equipment.y / world.clientHeight).toFixed(3)
+        );
+
         this.grabX = event.clientX - rect.left;
         this.grabY = event.clientY - rect.top;
 
@@ -145,6 +162,16 @@ class WorldController {
     drag(event) {
         if (!this.activeEquipment ||
             event.pointerId !== this.activePointerId) return;
+
+        const deltaX = event.clientX - this.fingerX;
+
+        // Only change direction for meaningful horizontal movement.
+        if (deltaX > 1) {
+            this.activeEquipment.faceDirection("right");
+        }
+        else if (deltaX < -1) {
+            this.activeEquipment.faceDirection("left");
+        }
 
         this.fingerX = event.clientX;
         this.fingerY = event.clientY;
@@ -215,6 +242,20 @@ async function loadEquipment() {
 
         const data = await response.json();
 
+        // Collect parking positions by equipment type.
+        const parkingSpots = {};
+
+        for (const area of data.parkingAreas) {
+            for (const spot of area.positions) {
+                if (!parkingSpots[spot.type]) {
+                    parkingSpots[spot.type] = [];
+                }
+
+                parkingSpots[spot.type].push(spot);
+            }
+        }
+
+
         for (const item of data.equipment) {
             for (let i = 1; i <= item.count; i++) {
 
@@ -235,12 +276,15 @@ async function loadEquipment() {
                 // Wait until the image dimensions are available.
                 await img.decode();
 
-                // Random position anywhere in the world.
-                const maxX = Math.max(0, world.clientWidth - img.offsetWidth);
-                const maxY = Math.max(0, world.clientHeight - img.offsetHeight);
+                // Assign the next available parking spot for this type.
+                const spot = parkingSpots[item.type]?.shift();
 
-                const x = Math.random() * maxX;
-                const y = Math.random() * maxY;
+                if (!spot) {
+                    throw new Error(`No parking spot for ${img.id}`);
+                }
+
+                const x = spot.x * world.clientWidth;
+                const y = spot.y * world.clientHeight;
 
                 machine.moveTo(x, y);
 
